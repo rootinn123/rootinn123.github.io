@@ -16,6 +16,7 @@ class MainViewMorePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Stack(
         children: <Widget>[
           this._buildPageWidget(context),
