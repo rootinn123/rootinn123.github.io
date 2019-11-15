@@ -75,6 +75,7 @@ class MarkWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return  Container(
+      alignment: Alignment.center,
       margin: EdgeInsets.only(right: 4.0),
       padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
       decoration: BoxDecoration(
