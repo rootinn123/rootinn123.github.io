@@ -24,12 +24,13 @@ class DumeiRepository {
   }
   /// 获取Menu
   Future<List<Menu>> getInitialData(Map<String, dynamic> comReq) async {
+    LogUtil.e('repo--getInitialData----->>>>>$comReq');
     Response response = await dioUtil.requestPure(
       Method.get, 
       DumeiApi.getPath(path: DumeiApi.INITIAL_DATA),
       queryParameters:comReq
     );
-    LogUtil.v('response----->>>>>${response.data.runtimeType}');
+    LogUtil.e('response----->>>>>${response.data.runtimeType}');
     Map<String, dynamic> resultMap = response.data;
     if(null != resultMap) {
       SpHelper.putObject<String>(Constant.KEY_INITIAL_DATA, jsonEncode(resultMap));

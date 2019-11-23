@@ -1,3 +1,4 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:root_inn/blocs/bloc_index.dart';
 import 'package:root_inn/common/commom.dart';
@@ -28,9 +29,10 @@ class OrderListPage extends StatelessWidget{
         stream: bloc.orderListBloc.comListStream,
         builder: (BuildContext context, AsyncSnapshot<List<OrderItem>> snapshot){
           List<OrderItem> orderList = snapshot.data ?? <OrderItem>[];
+          LogUtil.v('orderList---lengh: ${orderList.length}');
           double amount = 0.0;
           for(OrderItem orderItem in orderList){
-            amount += double.parse('$orderItem.unitPriceItem[AppHttpConstant.PRICE]') * orderItem.count;
+            amount += orderItem.product.unitPrice[orderItem.unitPriceItemIndex].price * orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount;
           }
           return this.buildContent(context, bloc, orderList, orderList.length,  amount);
         },
@@ -51,14 +53,16 @@ class OrderListPage extends StatelessWidget{
             right: 0.0,
             bottom: 0.0,
             child: SingleChildScrollView(
+              // child: DeskExpensionPanelWidget(),
               child: Container(
-                padding: EdgeInsets.only(left: AppDimens.padding_20, top: AppConfig.appBarHeight),
+                padding: EdgeInsets.only(left: AppDimens.padding_20, top: AppConfig.appBarHeight * AppConfig.appScreenHeight + 20),
                 child: Column(
                   children: <Widget>[
                     DeskExpensionPanelWidget(),
-                    Padding(
+                    Container(
+                      alignment: Alignment.centerLeft,
                       padding: EdgeInsets.only(top: AppDimens.padding_30,),
-                      child: Text('我的食谱', style: TextStyle(color: Colors.white, fontSize: AppDimens.font_24),),
+                      child: Text('我的食谱', style: TextStyle(color: Colors.white, fontSize: AppDimens.font_24), textAlign: TextAlign.start,),
                     ),
                     this._buildOrdersWidget(context, bloc, orderList),
                   ],                  
@@ -90,22 +94,31 @@ class OrderListPage extends StatelessWidget{
         color: AppColors.primaryColor,
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
             child: Row(
               children: <Widget>[
-                Text('数量： $categoryCount'),
+                Text('数量: $categoryCount', style: TextStyle(fontSize: AppDimens.font_18)),
                 Container(
                   width: AppDimens.padding_30,
                 ),
-                Text('合计： $amount'),
+                Text('合计: $amount',style: TextStyle(fontSize: AppDimens.font_18)),
               ],
             ),
           ),
 
           GestureDetector(
             onTap: (){
-              bloc.orderListBloc.comListData.sink.add(<OrderItem>[]);
+              if(!ObjectUtil.isEmptyList(bloc.orderListBloc.comList)){
+                for(OrderItem orderItem in bloc.orderListBloc.comList){
+                  orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount = 0;
+                }
+              }
+              bloc.orderListBloc.comList = <OrderItem>[];
+              bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList);
+              bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
+              Navigator.of(context).pop();
             },
             child: Container(
               alignment: Alignment.center,
@@ -127,7 +140,7 @@ class OrderListPage extends StatelessWidget{
   Widget _buildOrdersWidget(BuildContext context, MainBloc bloc, List<OrderItem> orderList){
     List<Widget> listWidget = orderList.map((OrderItem orderItem){
       return Offstage(
-        offstage: orderItem.count <= 0,
+        offstage: orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount <= 0,
         child: this._buildOrderItemWidget(context, bloc, orderItem),
       );
     }).toList();
@@ -149,9 +162,12 @@ class OrderListPage extends StatelessWidget{
         color: AppColors.primaryColor,
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text('${orderItem.product.name}', style: TextStyle(color: Colors.white, fontSize: AppDimens.font_17), maxLines: 1, overflow: TextOverflow.ellipsis,),
                 Text('${orderItem.product.aliasName}', style: TextStyle(color: AppColors.descriptionFontColor, fontSize: AppDimens.font_12), maxLines: 1, overflow: TextOverflow.ellipsis,),
@@ -160,7 +176,7 @@ class OrderListPage extends StatelessWidget{
           ),
 
           Container(
-            child: Text('${orderItem.unitPriceItem[AppHttpConstant.PRICE]}/${orderItem.unitPriceItem[AppHttpConstant.UNIT]}'),
+            child: Text('${orderItem.product.unitPrice[orderItem.unitPriceItemIndex].price}/${orderItem.product.unitPrice[orderItem.unitPriceItemIndex].unit}'),
           ),
 
           Container(
@@ -170,9 +186,10 @@ class OrderListPage extends StatelessWidget{
               children: <Widget>[
                 GestureDetector(
                   onTap: (){
-                    if(orderItem.count <= 0) return;
-                    orderItem.count--;
+                    if(orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount <= 0) return;
+                    orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount--;
                     bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList);
+                    bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
                   },
                   child: Container(
                     height: 30.0,
@@ -189,17 +206,18 @@ class OrderListPage extends StatelessWidget{
                 ),
 
                 Text(
-                  '${orderItem.count}', 
+                  '${orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount}', 
                   style: TextStyle(
-                    color: orderItem.count > 0 ? AppColors.countColor : AppColors.descriptionFontColor, 
+                    color: orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount > 0 ? AppColors.countColor : AppColors.descriptionFontColor, 
                     fontSize: AppDimens.font_16
                   ),
                 ),
 
                 GestureDetector(
                   onTap: (){
-                    orderItem.count++;
+                    orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount++;
                     bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList);
+                    bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
                   },
                   child: Container(
                     height: 30.0,
@@ -233,7 +251,7 @@ class DeskExpensionPanelWidget extends StatefulWidget{
 
 class _DeskExpensionPanelWidgetState extends State<DeskExpensionPanelWidget>{
 
-  bool _isExpanded = false;
+  bool _isExpanded = true;
 
   @override
   Widget build(BuildContext context) {
@@ -274,6 +292,7 @@ class _DeskExpensionPanelWidgetState extends State<DeskExpensionPanelWidget>{
       stream: bloc.currentDeskIndexBloc.comStream,
       builder: (BuildContext context, AsyncSnapshot<int> snapshot){
         List<Desk> deskList = bloc.deskListBloc.comList ?? <Desk> [];
+        LogUtil.e('_buildWrapDeskWidget---snapshot--->${deskList?.length}');
         List<Widget> listWidget = <Widget>[];
         for(int i=0; i< deskList.length; i++){
           listWidget.add(this._buildDescWidget(context, bloc, deskList[i], i ,snapshot.data == i));

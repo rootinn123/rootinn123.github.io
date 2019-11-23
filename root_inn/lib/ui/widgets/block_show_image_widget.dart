@@ -371,7 +371,7 @@ class ProductCard extends StatelessWidget{
             textAlign: TextAlign.right,
           ),
 
-          SelectOrderCountWidget(type: 2,product: this.product, width: 100.0, height: 40.0,)
+          SelectOrderCountWidget(type: 2,product: this.product, width: 100.0, height: 40.0, unitPriceIndex: 0,)
         ],
       ),
     );

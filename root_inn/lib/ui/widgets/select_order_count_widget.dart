@@ -1,4 +1,5 @@
 
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:root_inn/blocs/bloc_index.dart';
 import 'package:root_inn/data/models.dart';
@@ -49,35 +50,47 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
     if(widget.product.unitPrice[widget.unitPriceIndex].checkCount <= 0) return;
     List<OrderItem> orderList = bloc.orderListBloc.comList ?? <OrderItem>[];
     for(OrderItem orderItem in orderList){
-      if('${orderItem.product.id}${orderItem.product.name}${orderItem.product.unitPrice[widget.unitPriceIndex]}' == this.orderItemId){
-        orderItem.count--;
-        if(orderItem.count == 0){
+      if(orderItem.id == widget.product.unitPrice[widget.unitPriceIndex].id){
+        widget.product.unitPrice[widget.unitPriceIndex].checkCount--;
+        if(widget.product.unitPrice[widget.unitPriceIndex].checkCount == 0){
           orderList.remove(orderItem);
         }
         break;
       }
     }
     bloc.orderListBloc.comListData.sink.add(orderList);
-    setState(() => widget.product.unitPrice[widget.unitPriceIndex].checkCount--);
+    bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
+    if(widget.type != 1) setState(() {});
   }
 
   void _addCount(MainBloc bloc){
+    bool hasPalced = false;
+    widget.product.unitPrice[widget.unitPriceIndex].checkCount++;
     List<OrderItem> orderList = bloc.orderListBloc.comList ?? <OrderItem>[];
+    LogUtil.v('_addCount----->>>orderList: ${orderList.length}');
     for(OrderItem orderItem in orderList){
-      if(orderItem.product.id == widget.product.id){
-        orderItem.count++;
-        return;
+      if(orderItem.id == widget.product.unitPrice[widget.unitPriceIndex].id){
+        LogUtil.v('_addCount----->>>2.1');
+        hasPalced = true;
+        break;
       }
     }
-    orderList.add(
-      OrderItem(
-        id : this.orderItemId,
-        product: widget.product,
-        count: 1,
-      )
-    );
-    bloc.orderListBloc.comListData.sink.add(orderList);
-    setState(() => widget.product.unitPrice[widget.unitPriceIndex].checkCount++);
+    LogUtil.v('_addCount----->>>3');
+    if(!hasPalced){
+      LogUtil.v('_addCount----->>>4');
+      orderList.add(
+        OrderItem(
+          id : widget.product.unitPrice[widget.unitPriceIndex].id,
+          product: widget.product,
+          unitPriceItemIndex: widget.unitPriceIndex
+        )
+      );
+    }
+    LogUtil.v('_addCount----->>>5---${orderList.length}');
+    bloc.orderListBloc.comList = orderList;
+    bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList );
+    bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
+    if(widget.type != 1) setState(() {});
   }
 
 
@@ -149,6 +162,7 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
       height: widget.height,
       margin: EdgeInsets.only(left: 5.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           GestureDetector(
             onTap: () => this._subtractCount(bloc),
@@ -171,7 +185,6 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: AppColors.cardBottomColor,
-                borderRadius: BorderRadius.all(Radius.circular(2.0)),
               ),
               child: Text(
                 '${widget.product.unitPrice[widget.unitPriceIndex].checkCount}', 

@@ -130,12 +130,14 @@ class Product {
   }
 
   /// 解析价格数组
-  static List<SpecsProduct> resolveUnitPrice(dynamic val){
+  static List<SpecsProduct> resolveUnitPrice(dynamic productId,dynamic val){
     if(val == null || val == '' || '$val'.length < 1) return <SpecsProduct>[];
     List<SpecsProduct> list = <SpecsProduct>[];
+    int index = 1;
     for (String unitItem in '$val'.split(AppConfig.splitSymbol)){
       List<String> item = unitItem.split('/');
-      list.add(SpecsProduct(price: Utils.tranfer2Double(item[0]), unit: item[1],checkCount: 0),);
+      list.add(SpecsProduct(id: '$productId-$index' ,price: Utils.tranfer2Double(item[0]), unit: item[1],checkCount: 0),);
+      index++;
     }
     return list;
   }
@@ -147,7 +149,7 @@ class Product {
       category = Utils.trimData(jsonData['category']),
       currency = jsonData['currency'],
       price = jsonData['price'],
-      unitPrice = Product.resolveUnitPrice(jsonData['unitPrice']),
+      unitPrice = Product.resolveUnitPrice(jsonData['id'], jsonData['unitPrice']),
       newStatus = Utils.tranfer2Bool(jsonData['newStatus']),
       recommendStatus = Utils.tranfer2Bool(jsonData['recommendStatus']),
       type = jsonData['type'],
@@ -236,7 +238,7 @@ class Desk {
   Desk.fromJson(Map<String, dynamic> jsonData)
     : id = jsonData['id'],
       name = jsonData['name'],
-      colorType = jsonData['colorType'] ?? 1
+      colorType = Utils.tranfer2Int(jsonData['colorType']) ?? 1
     ;
 
 
@@ -255,25 +257,24 @@ class Desk {
 class OrderItem {
   String id;    // id = product.id + product.name + product.unitPrice
   Product product;
-  int count;
-  Map<String, dynamic> unitPriceItem;
+  // SpecsProduct unitPriceItem;
+  int unitPriceItemIndex;
   
   OrderItem({
     this.id,
     this.product, 
-    this.count,
+    // this.unitPriceItem,
+    this.unitPriceItemIndex
   });
 
   OrderItem.fromJson(Map<String, dynamic> jsonData)
   : 
     id = jsonData['id'],
-    product = jsonData['product'],
-    count = jsonData['count']
+    product = jsonData['product']
   ;
 
   Map<String, dynamic> toJson() => {
     'product': product,
-    'count' : count,
   };
 
   @override

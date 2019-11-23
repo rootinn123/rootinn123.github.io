@@ -20,7 +20,7 @@ class MainBloc implements BlocBase {
   ComListBloc<Desk> deskListBloc = ComListBloc<Desk>(comList: null);
 
   /// 首购物车
-  ComListBloc<OrderItem> orderListBloc = ComListBloc<OrderItem>(comList: List<OrderItem>());
+  ComListBloc<OrderItem> orderListBloc = ComListBloc<OrderItem>(comList: null);
 
   /// 当前吧台
   ComBloc<int>  currentDeskIndexBloc = ComBloc<int>(com: 0);
@@ -47,6 +47,7 @@ class MainBloc implements BlocBase {
   }
 
   Future<void> initAppData() async{
+    if(!ObjectUtil.isEmptyList(this.menulListBloc.comList)) return null;
     await SpUtil.getInstance();
     if(!SpUtil.isInitialized()) return null;
     String initialData = SpUtil.getString(Constant.KEY_INITIAL_DATA);

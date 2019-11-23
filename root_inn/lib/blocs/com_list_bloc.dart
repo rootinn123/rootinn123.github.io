@@ -32,6 +32,7 @@ class ComListBloc<T> implements BlocBase {
 
  @override
   Future getData({String labelId, String cid, Map<String, dynamic> comReq}) {
+    LogUtil.v('getData----->>>>>>$labelId');
     switch (labelId) {
       case AppLocalLabel.InitialData:
         return _getInitialData(labelId);  
@@ -56,7 +57,7 @@ class ComListBloc<T> implements BlocBase {
   Future _getInitialData(String labelId) {
 
     return this._dumeiRepository.getInitialData(null).then((List<Menu> result){
-      LogUtil.v('_getInitialData----->>>>>>handle');
+      LogUtil.v('_getInitialData----->>>>>>handle--->${result.length}');
      this.handleResultData(result);
     }).catchError((e){
       LogUtil.v('_getInitialData-----error-->>>>>>$e');
@@ -67,7 +68,7 @@ class ComListBloc<T> implements BlocBase {
   Future _getDeskData(String labelId) {
 
     return this._dumeiRepository.getDeskData(null).then((List<Desk> result){
-      LogUtil.v('_getDeskData----->>>>>>handle');
+      LogUtil.v('_getDeskData----->>>>>>handle--->${result.length}');
      this.handleResultData(result);
     }).catchError((e){
       LogUtil.v('_getDeskData-----error-->>>>>>$e');

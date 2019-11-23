@@ -23,6 +23,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LogUtil.v('MainPage----->Build--->');
     AppConfig.appScreenHeight = ScreenUtil.getScreenH(context);
     AppConfig.appScreenWidth = ScreenUtil.getScreenW(context);
     AppConfig.appStatusBarHeight = ScreenUtil.getStatusBarH(context);
@@ -40,14 +41,18 @@ class MainPage extends StatelessWidget {
   }
 
   Widget _buildStructureWidget(BuildContext context){
-
+    LogUtil.v('_buildStructureWidget----->Build--->1');
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
     if(bloc.menulListBloc == null) ComListBloc<Menu>(comList: null);
-    // if(ObjectUtil.isEmptyList(bloc.menulListBloc.comList )){
-    //   bloc.menulListBloc.getData(labelId: AppLocalLabel.InitialData, comReq: <String, dynamic>{});
-    // }
-    bloc.menulListBloc.getData(labelId: AppLocalLabel.InitialData, comReq: <String, dynamic>{});
-    bloc.deskListBloc.getData(labelId: AppLocalLabel.DeskData, comReq: <String, dynamic>{});
+    if(ObjectUtil.isEmptyList(bloc.menulListBloc.comList )){
+      LogUtil.v('menulListBloc判断为空取数据');
+      bloc.menulListBloc.getData(labelId: AppLocalLabel.InitialData, comReq: <String, dynamic>{});
+    }
+    if(ObjectUtil.isEmptyList(bloc.deskListBloc.comList )){
+      LogUtil.v('deskListBloc');
+      bloc.deskListBloc.getData(labelId: AppLocalLabel.DeskData, comReq: <String, dynamic>{});
+    }
+    LogUtil.v('_buildStructureWidget----->Build--->2');
     return StreamBuilder(
       stream: bloc.menulListBloc.comListStream,
       builder: (BuildContext context, AsyncSnapshot<List<Menu>> snapshot){
@@ -75,7 +80,7 @@ class MainPage extends StatelessWidget {
   }
   /// 头部
   Widget _buildHeaderWidget(BuildContext context, Menu menu, int index){
-    LogUtil.v('menuList----->>>>>>$appHeaderHeight');
+    LogUtil.v('_buildHeaderWidget----->>>>>>$appHeaderHeight');
     return Positioned(
       top: 0.0,
       left: 0.0,
