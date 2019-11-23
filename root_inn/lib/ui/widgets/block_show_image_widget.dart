@@ -8,11 +8,11 @@ import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/data/models.dart';
 import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
-import 'package:root_inn/ui/product_detail_page.dart.dart';
+// import 'package:root_inn/ui/product_detail_page.dart.dart';
 import 'package:root_inn/ui/route/app_routes.dart';
 import 'package:root_inn/ui/widgets/widgets.dart';
-import 'package:root_inn/utils/extended_cupertino_page_route.dart';
-import 'package:root_inn/utils/navigator_util.dart';
+// import 'package:root_inn/utils/extended_cupertino_page_route.dart';
+// import 'package:root_inn/utils/navigator_util.dart';
 
 class BlockShowImageWidget extends StatelessWidget{
   BlockShowImageWidget({Key key, this.menu}) : super(key: key);
@@ -175,14 +175,14 @@ class ProductCard extends StatelessWidget{
         child: Column(
           children: <Widget>[
             Expanded(
-              flex: type == 1 ? 13 : 8,
+              flex: type == 1 ? 13 : 13,
               child: Container(
                 // width: cardWidth,
                 child: this._buildDetailHeaderWidget(context),
               )
             ),
               Expanded(
-                flex: type == 1 ? 7 : 2,
+                flex: type == 1 ? 7 : 7,
               child: Container(
                 // width: cardWidth,
                 child: this._buildDetailBottomWidget(context),

@@ -13,8 +13,12 @@ class MainBloc implements BlocBase {
   /// 首页bottomNavi下标
   ComBloc<int>  mainBottomNaviIndexBloc = ComBloc<int>(com: 0);
 
-  /// 首页tab
+  /// 菜单
   ComListBloc<Menu> menulListBloc = ComListBloc<Menu>(comList: null);
+
+
+  /// 首购物车
+  ComListBloc<OrderItem> ordersBloc = ComListBloc<OrderItem>(comList: List<OrderItem>());
 
   /// 销毁  
   @override

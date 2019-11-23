@@ -189,3 +189,58 @@ class Product {
   }
 
 }
+
+class Desk {
+  String id;
+  String name;
+  
+  Desk({
+    this.id, 
+    this.name,
+   
+  });
+
+  Desk.fromJson(Map<String, dynamic> jsonData)
+    : id = jsonData['id'],
+      name = jsonData['name']
+    ;
+
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name' : name,
+  };
+
+  @override
+  String toString() {
+    return jsonEncode(this);
+  }
+
+}
+
+class OrderItem {
+  Product product;
+  int count;
+  
+  OrderItem({
+    this.product, 
+    this.count,
+   
+  });
+
+  OrderItem.fromJson(Map<String, dynamic> jsonData)
+  : product = jsonData['product'],
+    count = jsonData['count']
+  ;
+
+  Map<String, dynamic> toJson() => {
+    'product': product,
+    'count' : count,
+  };
+
+  @override
+  String toString() {
+    return jsonEncode(this);
+  }
+
+}

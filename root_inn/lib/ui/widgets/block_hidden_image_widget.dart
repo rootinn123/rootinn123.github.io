@@ -43,6 +43,7 @@ class BlockHiddenImageWidget extends StatelessWidget{
       list.add(
         GestureDetector(
           onTap: (){
+            if(ObjectUtil.isEmpty(product.image)) return;
             NavigatorUtil.pushPage(context, AppRoutes.getInstance().productDetailPage(product: product, isHero: false), useXCupertinoPageRoute: true);
           },
           child: this._buildProductItemWidget(context, product, itemWidget),
