@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:root_inn/data/models.dart';
-import 'package:root_inn/resources/app_dimens.dart';
 import 'package:root_inn/ui/main_page.dart';
 import 'package:root_inn/ui/widgets/block_hidden_image_widget.dart';
 import 'package:root_inn/ui/widgets/block_show_image_widget.dart';

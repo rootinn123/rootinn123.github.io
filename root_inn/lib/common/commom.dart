@@ -17,6 +17,7 @@ class Constant {
   static const String DUMEI_RESOURCE_SERVER = 'https://rootinn123.github.io/';
 
   static const String KEY_INITIAL_DATA = "KEY_INITIAL_DATA";
+  static const String KEY_DESK_DATA = "KEY_DESK_DATA";
 
   static const String IMAGE_BACK = "images/page/back.png";
   static const String IMAGE_LOGO = "images/page/logo.png";
@@ -66,6 +67,7 @@ class AppConfig {
 
 class AppLocalLabel{
   static const String InitialData = "InitialData";
+  static const String DeskData = "DeskData";
 }
 
 class AppHttpConstant {

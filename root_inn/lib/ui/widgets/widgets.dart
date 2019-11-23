@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/data/models.dart';
 import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
+import 'package:root_inn/ui/main_page.dart';
 import 'package:root_inn/ui/route/app_routes.dart';
 import 'package:root_inn/utils/navigator_util.dart';
 
@@ -96,4 +99,54 @@ class MarkWidget extends StatelessWidget{
     );
   }
 
+
 }
+
+class Appheader extends StatelessWidget{
+
+  Appheader({Key key, @required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return this._buildHeaderWidget(context);
+  }
+
+  Widget _buildHeaderWidget(BuildContext context){
+    return Positioned(
+      top: 0.0,
+      left: 0.0,
+      right: 0.0,
+      // bottom: AppConfig.appScreenHeight * AppConfig.appBarHeight,
+      child: Container(
+        height: MainPage.appHeaderHeight,
+        padding: EdgeInsets.only(left: AppDimens.padding_30, right: AppDimens.padding_30, top: AppConfig.appStatusBarHeight),
+        decoration: BoxDecoration(
+          color: AppColors.topNaviColor,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Container(
+                color: Colors.transparent,
+                padding: EdgeInsets.only(right: 10.0),
+                child: CachedNetworkImage(
+                  imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_BACK}',
+                  height: 20.0,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
+            Text('$title', style: TextStyle(fontSize: AppDimens.font_24), maxLines: 1, overflow: TextOverflow.ellipsis,),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+}
+

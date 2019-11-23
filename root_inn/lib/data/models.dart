@@ -91,7 +91,7 @@ class Product {
   String category;
   String currency;
   String price; 
-  List<Map<String, dynamic>> unitPrice;   // 加号分割
+  List<SpecsProduct> unitPrice;   // 加号分割
   bool newStatus;
   bool recommendStatus;
   String type;
@@ -130,15 +130,12 @@ class Product {
   }
 
   /// 解析价格数组
-  static List<Map<String, dynamic>> resolveUnitPrice(dynamic val){
-    if(val == null || val == '' || '$val'.length < 1) return <Map<String, dynamic>>[];
-    List<Map<String, dynamic>> list = <Map<String, dynamic>>[];
+  static List<SpecsProduct> resolveUnitPrice(dynamic val){
+    if(val == null || val == '' || '$val'.length < 1) return <SpecsProduct>[];
+    List<SpecsProduct> list = <SpecsProduct>[];
     for (String unitItem in '$val'.split(AppConfig.splitSymbol)){
       List<String> item = unitItem.split('/');
-      Map<String, dynamic> dataMap = {};
-      dataMap[AppHttpConstant.PRICE] = item[0];
-      dataMap[AppHttpConstant.UNIT] = item[1];
-      list.add(dataMap);
+      list.add(SpecsProduct(price: Utils.tranfer2Double(item[0]), unit: item[1],checkCount: 0),);
     }
     return list;
   }
@@ -190,19 +187,56 @@ class Product {
 
 }
 
+class SpecsProduct {
+  String id;
+  String unit;
+  double price;  //1红色，2 蓝色， 3绿色， 4深绿
+  int checkCount;
+  
+  SpecsProduct({
+    this.id, 
+    this.unit,
+    this.price,
+    this.checkCount,
+  });
+
+  SpecsProduct.fromJson(Map<String, dynamic> jsonData)
+    : id = jsonData['id'],
+      unit = jsonData['unit'],
+      price = jsonData['price'],
+      checkCount = 0
+    ;
+
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'unit' : unit,
+    'price' : price,
+    'checkCount' : checkCount,
+  };
+
+  @override
+  String toString() {
+    return jsonEncode(this);
+  }
+
+}
+
 class Desk {
   String id;
   String name;
+  int colorType;  //1红色，2 蓝色， 3绿色， 4深绿
   
   Desk({
     this.id, 
     this.name,
-   
+    this.colorType,
   });
 
   Desk.fromJson(Map<String, dynamic> jsonData)
     : id = jsonData['id'],
-      name = jsonData['name']
+      name = jsonData['name'],
+      colorType = jsonData['colorType'] ?? 1
     ;
 
 
@@ -219,17 +253,21 @@ class Desk {
 }
 
 class OrderItem {
+  String id;    // id = product.id + product.name + product.unitPrice
   Product product;
   int count;
+  Map<String, dynamic> unitPriceItem;
   
   OrderItem({
+    this.id,
     this.product, 
     this.count,
-   
   });
 
   OrderItem.fromJson(Map<String, dynamic> jsonData)
-  : product = jsonData['product'],
+  : 
+    id = jsonData['id'],
+    product = jsonData['product'],
     count = jsonData['count']
   ;
 

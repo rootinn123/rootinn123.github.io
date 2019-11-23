@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
@@ -194,6 +195,17 @@ class Utils {
   static int tranfer2Int(dynamic val){
     if(val == null || val == "") return 0;
     return int.parse('$val'.trim());
+  }
+
+  /// double
+  static double tranfer2Double(dynamic val){
+    if(val == null || val == "") return 0.0;
+    try {
+      return double.parse('$val'.trim());
+    } catch(e){
+      LogUtil.e('tranfer2Double---->--val: $val-->error: $e');
+      return 0.0;
+    }
   }
 
   /// 转成bool

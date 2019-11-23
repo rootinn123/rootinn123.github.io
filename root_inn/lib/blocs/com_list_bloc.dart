@@ -35,6 +35,8 @@ class ComListBloc<T> implements BlocBase {
     switch (labelId) {
       case AppLocalLabel.InitialData:
         return _getInitialData(labelId);  
+      case AppLocalLabel.DeskData:
+        return _getDeskData(labelId); 
       default:
         return Future.delayed(new Duration(milliseconds: 1));
         break;
@@ -55,17 +57,32 @@ class ComListBloc<T> implements BlocBase {
 
     return this._dumeiRepository.getInitialData(null).then((List<Menu> result){
       LogUtil.v('_getInitialData----->>>>>>handle');
-      List<T> list = result as List<T>;
-      if(null != list && list.length > 0){
-        this.comList = this.comList ?? List<T>();
-        this.comList.clear();
-        this.comList.addAll(List.castFrom(list));
-        this._comListSink.add(UnmodifiableListView<T>(this.comList));
-      }
+     this.handleResultData(result);
     }).catchError((e){
       LogUtil.v('_getInitialData-----error-->>>>>>$e');
     });
 
+  }
+
+  Future _getDeskData(String labelId) {
+
+    return this._dumeiRepository.getDeskData(null).then((List<Desk> result){
+      LogUtil.v('_getDeskData----->>>>>>handle');
+     this.handleResultData(result);
+    }).catchError((e){
+      LogUtil.v('_getDeskData-----error-->>>>>>$e');
+    });
+
+  }
+
+  void handleResultData(List<dynamic> result){
+    List<T> list = result as List<T>;
+    if(null != list && list.length > 0){
+      this.comList = this.comList ?? List<T>();
+      this.comList.clear();
+      this.comList.addAll(List.castFrom(list));
+      this._comListSink.add(UnmodifiableListView<T>(this.comList));
+    }
   }
 
 }

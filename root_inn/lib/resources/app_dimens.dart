@@ -4,10 +4,13 @@ class AppDimens {
   static const double font_12 = 12.0;
   static const double font_14 = 14.0;
   static const double font_16 = 16.0;
+  static const double font_17 = 16.0;
   static const double font_18 = 18.0;
   static const double font_20 = 20.0;
   static const double font_22 = 22.0;
   static const double font_24 = 24.0;
+  static const double font_26 = 26.0;
+  static const double font_28 = 28.0;
   static const double font_36 = 36.0;
   static const double font_48 = 48.0;
 
@@ -36,8 +39,13 @@ class AppDimens {
   static const double padding_70 = 70.0;
   static const double padding_80 = 80.0;
 
-  static const double card_width = 230.0;
+  static const double no_img_card_width = 230.0;
+  static const double card_width = 216.0;
   static const double card_height = 230.0;
 
+  static const double order_item_width = 696.0;
+  static const double order_item_height = 80.0;
+
   static const double width_80 = 80.0;
+
 }

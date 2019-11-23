@@ -10,6 +10,8 @@ import 'package:root_inn/data/models.dart';
 import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
 import 'package:root_inn/ui/main_detail_page.dart';
+import 'package:root_inn/ui/route/app_routes.dart';
+import 'package:root_inn/utils/navigator_util.dart';
 
 
 class MainPage extends StatelessWidget {
@@ -45,6 +47,7 @@ class MainPage extends StatelessWidget {
     //   bloc.menulListBloc.getData(labelId: AppLocalLabel.InitialData, comReq: <String, dynamic>{});
     // }
     bloc.menulListBloc.getData(labelId: AppLocalLabel.InitialData, comReq: <String, dynamic>{});
+    bloc.deskListBloc.getData(labelId: AppLocalLabel.DeskData, comReq: <String, dynamic>{});
     return StreamBuilder(
       stream: bloc.menulListBloc.comListStream,
       builder: (BuildContext context, AsyncSnapshot<List<Menu>> snapshot){
@@ -92,6 +95,27 @@ class MainPage extends StatelessWidget {
               imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_LOGO}',
               height: 18.0,
               fit: BoxFit.fitHeight,
+            ),
+            Container(
+              child: Row(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: (){
+                      NavigatorUtil.pushPage(context, AppRoutes.getInstance().orderListPage);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(right: 15.0),
+                      child: Image.asset('assets/images/shoppingCar.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){},
+                    child: Container(
+                      child: Image.asset('assets/images/prize.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
+                    ),
+                  )
+                ],
+              ),
             )
           ],
         ),

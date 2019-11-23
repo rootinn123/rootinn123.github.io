@@ -4,12 +4,14 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:root_inn/blocs/bloc_index.dart';
 import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/data/models.dart';
 import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
 // import 'package:root_inn/ui/product_detail_page.dart.dart';
 import 'package:root_inn/ui/route/app_routes.dart';
+import 'package:root_inn/ui/widgets/select_order_count_widget.dart';
 import 'package:root_inn/ui/widgets/widgets.dart';
 // import 'package:root_inn/utils/extended_cupertino_page_route.dart';
 // import 'package:root_inn/utils/navigator_util.dart';
@@ -53,34 +55,67 @@ class BlockShowImageWidget extends StatelessWidget{
       width: AppDimens.padding_30,
     ));
     this.menu.products.forEach((Product product){
-      Widget cardWidget =  Container(
-        height: AppDimens.card_height,
-        width: AppDimens.card_width + AppDimens.padding_10,
-        // color: Colors.blue,
-        child: GestureDetector(
-          onTap: (){
-            Navigator.push(
-              context, 
-              PageRouteBuilder(
-                opaque: false,
-                transitionDuration: Duration(milliseconds: 300),
-                pageBuilder: (_, __, ___) => AppRoutes.getInstance().productDetailPage(product: product),
-              )
-            );
-          },
-          child: Hero(
-            tag: '${product.id}${product.image}',
-            child: ProductCard(product: product,  ratio: 0.65,),
-            transitionOnUserGestures: true
-          ),
-      ),
-      );
-      list.add(cardWidget);
+      list.add(PlaceOrderPrudct(product: product,));
     });
     return list;
   }
 
+  
+
 }
+
+class PlaceOrderPrudct extends StatelessWidget{
+
+  PlaceOrderPrudct({Key key, this.product}): super(key: key);
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        this._buildCardHeaderWidget(context),
+        Container(height: 1.0,),
+        SelectOrderCountWidget(
+          product: this.product,
+          width: AppDimens.card_width,
+          height: 42.0,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCardHeaderWidget(BuildContext context){
+    return Container(
+      height: AppDimens.card_height,
+      width: AppDimens.card_width + AppDimens.padding_10,
+      // color: Colors.blue,
+      child: GestureDetector(
+        onTap: (){
+          Navigator.push(
+            context, 
+            PageRouteBuilder(
+              opaque: false,
+              transitionDuration: Duration(milliseconds: 300),
+              pageBuilder: (_, __, ___) => AppRoutes.getInstance().productDetailPage(product: this.product),
+            )
+          );
+        },
+        child: Hero(
+          tag: '${this.product.id}${this.product.image}',
+          child: ProductCard(product: this.product,  ratio: 0.65,),
+          transitionOnUserGestures: true
+        ),
+      ),
+    );
+  }
+
+  
+
+}
+
 
 class ProductCard extends StatelessWidget{
 
@@ -169,20 +204,24 @@ class ProductCard extends StatelessWidget{
         // padding: this.type == 2 ? : null,
         decoration: BoxDecoration(
           color: Colors.transparent,
-          borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius_10,)),
+          borderRadius: 
+            this.type == 1 ? 
+            BorderRadius.only(topLeft: Radius.circular(AppDimens.radius_10,), topRight: Radius.circular(AppDimens.radius_10,))
+            :
+            BorderRadius.all(Radius.circular(AppDimens.radius_10,)),
         ),
         // child: Text('sadasdaasd'),
         child: Column(
           children: <Widget>[
             Expanded(
-              flex: type == 1 ? 13 : 13,
+              flex: type == 1 ? 9 : 43,
               child: Container(
                 // width: cardWidth,
                 child: this._buildDetailHeaderWidget(context),
               )
             ),
               Expanded(
-                flex: type == 1 ? 7 : 7,
+                flex: type == 1 ? 6 : 48,
               child: Container(
                 // width: cardWidth,
                 child: this._buildDetailBottomWidget(context),
@@ -243,7 +282,11 @@ class ProductCard extends StatelessWidget{
       decoration: BoxDecoration(
         color: AppColors.topNaviColor,
         // color: Colors.blue,
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(AppDimens.radius_10,), bottomRight: Radius.circular(AppDimens.radius_10,)),
+        // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(AppDimens.radius_10,), bottomRight: Radius.circular(AppDimens.radius_10,)),
+        borderRadius: this.type == 1 ? 
+            null // BorderRadius.only(topLeft: Radius.circular(AppDimens.radius_10,), topRight: Radius.circular(AppDimens.radius_10,))
+            :
+            BorderRadius.only(bottomLeft: Radius.circular(AppDimens.radius_10,), bottomRight: Radius.circular(AppDimens.radius_10,)),
       ),
       child: Column(
         children: <Widget>[
@@ -304,25 +347,32 @@ class ProductCard extends StatelessWidget{
     if(ObjectUtil.isEmptyList(this.product.unitPrice)){
       priceInfo = '${this.product.price}${this.product.currency}';
     }else{
-      priceInfo = this.product.unitPrice.map((Map<String, dynamic> map){
-        return '${map[AppHttpConstant.PRICE]}${map[AppHttpConstant.UNIT]}';
+      priceInfo = this.product.unitPrice.map((SpecsProduct  specsProduct){
+        return '${specsProduct.price}${specsProduct.unit}';
       }).join(' ');
     }
     return Expanded(
       flex: 3,
-      child: Text(
-        '$priceInfo', 
-          style: TextStyle(
-            fontWeight: FontWeight.normal,
-            fontStyle: FontStyle.normal,
-            fontFamily: 'pixel',
-            decoration: TextDecoration.none,
-            fontSize: AppDimens.font_24,
-            color: Colors.white,
-          ), 
-        overflow: TextOverflow.ellipsis, 
-        maxLines: 1,
-        textAlign: TextAlign.right,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Text(
+            '$priceInfo', 
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
+                fontStyle: FontStyle.normal,
+                fontFamily: 'pixel',
+                decoration: TextDecoration.none,
+                fontSize: AppDimens.font_24,
+                color: Colors.white,
+              ), 
+            overflow: TextOverflow.ellipsis, 
+            maxLines: 1,
+            textAlign: TextAlign.right,
+          ),
+
+          SelectOrderCountWidget(type: 2,product: this.product, width: 100.0, height: 40.0,)
+        ],
       ),
     );
   }
@@ -335,16 +385,21 @@ class ProductCard extends StatelessWidget{
           this.type == 1 && !ObjectUtil.isEmptyList(this.product.mark) ?
            Container() 
           : 
-            Padding(
-              padding: EdgeInsets.only(right: 4.0),
-              child: Text(
-                '${this.product.aliasName}', 
-                style: TextStyle(
-                  fontSize: AppDimens.font_16, 
-                  color: AppColors.descriptionFontColor,
-                  fontFamily: 'pixel',
-                  decoration: TextDecoration.none,
-                )
+            Expanded(
+              flex: 2,
+              child: Container(
+                padding: EdgeInsets.only(right: 4.0),
+                child: Text(
+                  '${this.product.aliasName}', 
+                  style: TextStyle(
+                    fontSize: AppDimens.font_16, 
+                    color: AppColors.descriptionFontColor,
+                    fontFamily: 'pixel',
+                    decoration: TextDecoration.none,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
           ObjectUtil.isEmptyList(this.product.mark) ?  Container(): SizedBox(
@@ -359,6 +414,7 @@ class ProductCard extends StatelessWidget{
           : 
             Container(),
           this.type == 1 ? Expanded(
+            flex: 1,
             child: Text(
               '${this.product.price}${this.product.currency}', 
                 style: TextStyle(

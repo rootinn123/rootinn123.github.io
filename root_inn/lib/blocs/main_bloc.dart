@@ -16,9 +16,14 @@ class MainBloc implements BlocBase {
   /// 菜单
   ComListBloc<Menu> menulListBloc = ComListBloc<Menu>(comList: null);
 
+  /// 吧台桌子
+  ComListBloc<Desk> deskListBloc = ComListBloc<Desk>(comList: null);
 
   /// 首购物车
-  ComListBloc<OrderItem> ordersBloc = ComListBloc<OrderItem>(comList: List<OrderItem>());
+  ComListBloc<OrderItem> orderListBloc = ComListBloc<OrderItem>(comList: List<OrderItem>());
+
+  /// 当前吧台
+  ComBloc<int>  currentDeskIndexBloc = ComBloc<int>(com: 0);
 
   /// 销毁  
   @override

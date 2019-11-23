@@ -34,6 +34,12 @@ class AppColors {
 
   static const Color markFontColor = Color(0xFF89371A);
   static const Color divider = Color(0xffe5e5e5);
+
+  static const Color countColor = Color.fromRGBO(255, 0, 103, 1.0);
+  static const Color cardBottomColor = Color.fromRGBO(22, 26, 39, 1.0);
+  static const Color confirmButtonNaviColor = Color.fromRGBO(244, 1, 103,1.0);
+  static const Color updateButtonNaviColor = Color.fromRGBO(50, 129, 255, 1.0);
+
 }
 
 Map<String, Color> circleAvatarMap = {

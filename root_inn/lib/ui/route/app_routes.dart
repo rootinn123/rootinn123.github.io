@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:root_inn/data/models.dart';
 import 'package:root_inn/ui/main_view_more_page.dart';
+import 'package:root_inn/ui/order_list_page.dart';
 import 'package:root_inn/ui/product_detail_page.dart.dart';
 
 
@@ -17,7 +18,7 @@ class AppRoutes{
     return _instance;
   }
 
-  // Widget get mainPage => const MainPage();
+  Widget get orderListPage => const OrderListPage();
   Widget mainViewMorePage({@required Menu menu}) => MainViewMorePage(menu: menu, );
 
   Widget productDetailPage({@required Product product, bool isHero=true}) => ProductDetailPage(product: product, isHero: isHero);

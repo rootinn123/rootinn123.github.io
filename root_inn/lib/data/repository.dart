@@ -26,7 +26,7 @@ class DumeiRepository {
   Future<List<Menu>> getInitialData(Map<String, dynamic> comReq) async {
     Response response = await dioUtil.requestPure(
       Method.get, 
-      DumeiApi.getPath(path: DumeiApi.initialData),
+      DumeiApi.getPath(path: DumeiApi.INITIAL_DATA),
       queryParameters:comReq
     );
     LogUtil.v('response----->>>>>${response.data.runtimeType}');
@@ -92,5 +92,21 @@ class DumeiRepository {
     return mainMenuList;
   }
 
+  /// Desk
+  Future<List<Desk>> getDeskData(Map<String, dynamic> comReq) async {
+    Response response = await dioUtil.requestPure(
+      Method.get, 
+      DumeiApi.getPath(path: DumeiApi.DESK_DATA),
+      queryParameters:comReq,
+    );
+    LogUtil.v('response----->>>>>${response.data.runtimeType}');
+    if(null != response.data) {
+      SpHelper.putObject<String>(Constant.KEY_DESK_DATA, jsonEncode(response.data));
+    }
+    List<dynamic> list = response.data;
+    return list.map((dynamic val){
+      return Desk.fromJson(val);
+    }).toList();
+  }
 
 }
