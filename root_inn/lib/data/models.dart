@@ -283,3 +283,33 @@ class OrderItem {
   }
 
 }
+
+class LotteryItemModel {
+  final String title;
+  final String icon;
+  final int coefficient;
+
+  LotteryItemModel({
+    this.title,
+    this.icon, 
+    this.coefficient
+  });
+
+  LotteryItemModel.fromJson(Map<String, dynamic> jsonData)
+  : 
+    title = jsonData['title'],
+    icon = jsonData['icon'],
+    coefficient = jsonData['coefficient'] ?? 10
+  ;
+
+  Map<String, dynamic> toJson() => {
+    'titleNatitleme': title,
+    'icon': icon,
+    'coefficient': coefficient,
+  };
+
+  @override
+  String toString() {
+    return jsonEncode(this);
+  }
+}

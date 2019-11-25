@@ -25,6 +25,9 @@ class MainBloc implements BlocBase {
   /// 当前吧台
   ComBloc<int>  currentDeskIndexBloc = ComBloc<int>(com: 0);
 
+  /// 中奖概率
+  ComListBloc<LotteryItemModel> lotteryItemModelListBloc = ComListBloc<LotteryItemModel>(comList: null);
+
   /// 销毁  
   @override
   void dispose() {

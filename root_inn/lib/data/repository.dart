@@ -110,4 +110,21 @@ class DumeiRepository {
     }).toList();
   }
 
+  /// LotteryItemModel
+  Future<List<LotteryItemModel>> getLotteryItemModelData(Map<String, dynamic> comReq) async {
+    Response response = await dioUtil.requestPure(
+      Method.get, 
+      DumeiApi.getPath(path: DumeiApi.LOTTERY_DATA),
+      queryParameters:comReq,
+    );
+    LogUtil.v('response----->>>>>${response.data.runtimeType}');
+    if(null != response.data) {
+      SpHelper.putObject<String>(Constant.KEY_DESK_DATA, jsonEncode(response.data));
+    }
+    List<dynamic> list = response.data;
+    return list.map((dynamic val){
+      return LotteryItemModel.fromJson(val);
+    }).toList();
+  }
+
 }

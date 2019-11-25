@@ -31,6 +31,9 @@ class MyApp extends StatelessWidget {
         fontFamily: "pixel",
         brightness: Brightness.dark,
         primaryColor: AppColors.primaryColor,
+        textTheme: TextTheme(
+          body1: TextStyle(decoration: TextDecoration.none)
+        )
       ),
       home: MainPage(title: 'Flutter Demo Home Page'),
     );

@@ -104,9 +104,11 @@ class MarkWidget extends StatelessWidget{
 
 class Appheader extends StatelessWidget{
 
-  Appheader({Key key, @required this.title}) : super(key: key);
+  Appheader({Key key, @required this.title, this.bgColor= AppColors.topNaviColor}) : super(key: key);
 
   final String title;
+
+  final Color bgColor;
 
   @override
   Widget build(BuildContext context) {
@@ -114,36 +116,35 @@ class Appheader extends StatelessWidget{
   }
 
   Widget _buildHeaderWidget(BuildContext context){
-    return Positioned(
-      top: 0.0,
-      left: 0.0,
-      right: 0.0,
-      // bottom: AppConfig.appScreenHeight * AppConfig.appBarHeight,
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pop(),
       child: Container(
         height: MainPage.appHeaderHeight,
         padding: EdgeInsets.only(left: AppDimens.padding_30, right: AppDimens.padding_30, top: AppConfig.appStatusBarHeight),
         decoration: BoxDecoration(
-          color: AppColors.topNaviColor,
+          color: this.bgColor,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: Container(
-                color: Colors.transparent,
-                padding: EdgeInsets.only(right: 10.0),
-                child: CachedNetworkImage(
-                  imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_BACK}',
-                  height: 20.0,
-                  fit: BoxFit.fitHeight,
-                ),
+            Container(
+              color: Colors.transparent,
+              padding: EdgeInsets.only(right: 10.0),
+              child: CachedNetworkImage(
+                imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_BACK}',
+                height: 20.0,
+                fit: BoxFit.fitHeight,
               ),
             ),
-            Text('$title', style: TextStyle(fontSize: AppDimens.font_24), maxLines: 1, overflow: TextOverflow.ellipsis,),
+            Text(
+              '$title', 
+              style: TextStyle(fontSize: AppDimens.font_24, decoration: TextDecoration.none), 
+              maxLines: 1, 
+              overflow: TextOverflow.ellipsis,
+            ),
           ],
         ),
-      ),
+      )
     );
   }
 

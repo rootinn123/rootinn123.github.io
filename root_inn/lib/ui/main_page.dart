@@ -52,6 +52,10 @@ class MainPage extends StatelessWidget {
       LogUtil.v('deskListBloc');
       bloc.deskListBloc.getData(labelId: AppLocalLabel.DeskData, comReq: <String, dynamic>{});
     }
+     if(ObjectUtil.isEmptyList(bloc.lotteryItemModelListBloc.comList )){
+      LogUtil.v('lotteryItemModelListBloc');
+      bloc.deskListBloc.getData(labelId: AppLocalLabel.LotteryData, comReq: <String, dynamic>{});
+    }
     LogUtil.v('_buildStructureWidget----->Build--->2');
     return StreamBuilder(
       stream: bloc.menulListBloc.comListStream,
@@ -114,7 +118,9 @@ class MainPage extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                      NavigatorUtil.pushPage(context, AppRoutes.getInstance().lotteryViewPage);
+                    },
                     child: Container(
                       child: Image.asset('assets/images/prize.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
                     ),

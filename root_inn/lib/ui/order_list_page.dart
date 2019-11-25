@@ -71,7 +71,12 @@ class OrderListPage extends StatelessWidget{
             ),
           ),
 
-          Appheader(title: '食谱列表',),
+          Positioned(
+            top: 0.0,
+            left: 0.0,
+            right: 0.0,
+            child:Appheader(title: '食谱列表',),
+          ),
 
           Positioned(
             bottom: 0.0,

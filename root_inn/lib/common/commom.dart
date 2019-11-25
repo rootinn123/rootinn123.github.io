@@ -68,6 +68,7 @@ class AppConfig {
 class AppLocalLabel{
   static const String InitialData = "InitialData";
   static const String DeskData = "DeskData";
+  static const String LotteryData = "LotteryData";
 }
 
 class AppHttpConstant {
