@@ -54,7 +54,7 @@ class MainPage extends StatelessWidget {
     }
      if(ObjectUtil.isEmptyList(bloc.lotteryItemModelListBloc.comList )){
       LogUtil.v('lotteryItemModelListBloc');
-      bloc.deskListBloc.getData(labelId: AppLocalLabel.LotteryData, comReq: <String, dynamic>{});
+      bloc.lotteryItemModelListBloc.getData(labelId: AppLocalLabel.LotteryData, comReq: <String, dynamic>{});
     }
     LogUtil.v('_buildStructureWidget----->Build--->2');
     return StreamBuilder(

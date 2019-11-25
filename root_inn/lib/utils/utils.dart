@@ -192,19 +192,19 @@ class Utils {
   }
 
   /// 转成int
-  static int tranfer2Int(dynamic val){
-    if(val == null || val == "") return 0;
+  static int tranfer2Int(dynamic val, {int defaultVal = 0}){
+    if(val == null || val == "") return defaultVal;
     return int.parse('$val'.trim());
   }
 
   /// double
-  static double tranfer2Double(dynamic val){
+  static double tranfer2Double(dynamic val, {double defaultVal = 0.0}){
     if(val == null || val == "") return 0.0;
     try {
       return double.parse('$val'.trim());
     } catch(e){
       LogUtil.e('tranfer2Double---->--val: $val-->error: $e');
-      return 0.0;
+      return defaultVal;
     }
   }
 

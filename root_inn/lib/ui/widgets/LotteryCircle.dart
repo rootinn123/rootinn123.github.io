@@ -71,8 +71,8 @@ class _LotteryCirclePanState extends State<LotteryCirclePan> with SingleTickerPr
         child: Transform.rotate(
           angle: pi / 180.0 * (i * 1.0 / _lotteryList.length) * 360.0 + 90 * pi / 180.0,
           child: Container(
-            width: 280.0,
-            height: 280.0,
+            width: 250.0,
+            height: 250.0,
             // color: Colors.yellow,
             // color: Colors.yellow,
             child: Column(
@@ -83,7 +83,7 @@ class _LotteryCirclePanState extends State<LotteryCirclePan> with SingleTickerPr
                   itemModel.title,
                   style: TextStyle(
                     color: Color(0xFF974500),
-                    fontSize: AppDimens.font_18,
+                    fontSize: AppDimens.font_16,
                     fontWeight: FontWeight.bold,
                     decoration: TextDecoration.none,
                   ),
@@ -93,8 +93,8 @@ class _LotteryCirclePanState extends State<LotteryCirclePan> with SingleTickerPr
   //                giftImg: 'assets/lotteryImgs/' + itemModel.icon + '.png',
   //              ),
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: 80.0,
+                  height: 80.0,
                   // child: Image.asset(
                   //   'assets/lotteryImgs/' + itemModel.icon + '.png',
                   //   fit: BoxFit.fill,
@@ -130,7 +130,7 @@ class _LotteryCirclePanState extends State<LotteryCirclePan> with SingleTickerPr
     super.initState();
 
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
-    this._lotteryList =  bloc.lotteryItemModelListBloc.comList;
+    this._lotteryList =  bloc.lotteryItemModelListBloc.comList ?? <LotteryItemModel>[];
     if(!ObjectUtil.isEmptyList(this._lotteryList )){
       for(LotteryItemModel lotteryItemModel in this._lotteryList){
         this.totalCoefficient += lotteryItemModel.coefficient ?? 10;

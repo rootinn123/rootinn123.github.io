@@ -81,10 +81,10 @@ class ComListBloc<T> implements BlocBase {
   Future _getLotteryData(String labelId) {
 
     return this._dumeiRepository.getLotteryItemModelData(null).then((List<LotteryItemModel> result){
-      LogUtil.v('_getDeskData----->>>>>>handle--->${result.length}');
+      LogUtil.v('_getLotteryData----->>>>>>handle--->${result.length}');
      this.handleResultData(result);
     }).catchError((e){
-      LogUtil.v('_getDeskData-----error-->>>>>>$e');
+      LogUtil.v('_getLotteryData-----error-->>>>>>$e');
     });
 
   }

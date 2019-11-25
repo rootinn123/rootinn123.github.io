@@ -6,7 +6,5 @@
     {"title":"五等奖","icon":"images/lottery/5_prize.png","coefficient":"100000"},
     {"title":"六等奖","icon":"images/lottery/6_prize.png","coefficient":"200000"},
     {"title":"七等奖","icon":"images/lottery/7_prize.png","coefficient":"300000"},
-    {"title":"八等奖","icon":"images/lottery/8_prize.png","coefficient":"400000"},
     {"title":"谢谢参与","icon":"images/lottery/thanks.png","coefficient":"500000"}
-    
 ]

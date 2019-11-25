@@ -299,7 +299,7 @@ class LotteryItemModel {
   : 
     title = jsonData['title'],
     icon = jsonData['icon'],
-    coefficient = jsonData['coefficient'] ?? 10
+    coefficient = Utils.tranfer2Int(jsonData['coefficient'], defaultVal: 10)
   ;
 
   Map<String, dynamic> toJson() => {
