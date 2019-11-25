@@ -38,6 +38,9 @@ class AppConfig {
   static double searchBarHeight = 45.0;
   static int commonDuration = 350;
 
+  static double appHeaderHeight;
+  static double bottomNaviHeight;  
+
   static const SystemUiOverlayStyle dark = SystemUiOverlayStyle(    // 黑色字体
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
@@ -63,6 +66,15 @@ class AppConfig {
   );
 
   static const String splitSymbol = '+';
+
+  static Map<int, Color> deskColor = {
+    1: Color.fromRGBO(255, 0, 103, 1.0),
+    2: Color.fromRGBO(0, 129, 255, 1.0),
+    3: Color.fromRGBO(15, 201, 69, 1.0),
+    4: Color.fromRGBO(255, 175, 0, 1.0),
+    5: Color.fromRGBO(198, 0, 255, 1.0),
+    6: Color.fromRGBO(164, 164, 164, 1.0),
+  };
 }
 
 class AppLocalLabel{

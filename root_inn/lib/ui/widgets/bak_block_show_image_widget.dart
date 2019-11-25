@@ -161,8 +161,11 @@ class ProductCard extends StatelessWidget{
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        ObjectUtil.isEmptyList(this.product.mark) ?  Container(): SizedBox(
-          width: 120,
+        ObjectUtil.isEmptyList(this.product.mark) ?  Container(): ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: 80.0,
+            minWidth: 40,
+          ),
           child: MarkWidget(mark: this.product.mark[0],),
         ),
         this.product.mark.length > 1 ? MarkWidget(mark: this.product.mark[1],) : Container(),

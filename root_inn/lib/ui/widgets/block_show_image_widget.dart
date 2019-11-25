@@ -302,7 +302,7 @@ class ProductCard extends StatelessWidget{
                   fontStyle: FontStyle.normal,
                   fontFamily: 'pixel',
                   decoration: TextDecoration.none,
-                  fontSize: this.type ==1 ? AppDimens.font_18 : AppDimens.font_24,
+                  fontSize: this.type ==1 ? AppDimens.font_16 : AppDimens.font_24,
                   color: Colors.white,
                 ), overflow: TextOverflow.ellipsis, maxLines: 1,),
               ),
@@ -312,11 +312,33 @@ class ProductCard extends StatelessWidget{
           Padding(
             padding: EdgeInsets.only(top: AppDimens.padding_4),
           ),
+          
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.only(right: 4.0),
+            child: Text(
+              '${this.product.aliasName}', 
+              style: TextStyle(
+                fontSize: AppDimens.font_12, 
+                color: AppColors.descriptionFontColor,
+                fontFamily: 'pixel',
+                decoration: TextDecoration.none,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+              
+          Padding(
+            padding: EdgeInsets.only(top: AppDimens.padding_4),
+          ),
+          
           this._buildDetailCenterDescWidget(context),
           Padding(
             padding: EdgeInsets.only(top: AppDimens.padding_4),
           ),
-          ObjectUtil.isNotEmpty(this.product.aliasName) && this.type == 2 ? 
+          
+          ObjectUtil.isNotEmpty(this.product.description) && this.type == 2 ? 
             Container(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(vertical: AppDimens.padding_2),
@@ -370,45 +392,33 @@ class ProductCard extends StatelessWidget{
             maxLines: 1,
             textAlign: TextAlign.right,
           ),
-
-          SelectOrderCountWidget(type: 2,product: this.product, width: 100.0, height: 40.0, unitPriceIndex: 0,)
         ],
       ),
     );
   }
 
   Widget _buildDetailCenterDescWidget(BuildContext context){
+   
     return Container(
       padding: EdgeInsets.symmetric(vertical: AppDimens.padding_2),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          this.type == 1 && !ObjectUtil.isEmptyList(this.product.mark) ?
-           Container() 
-          : 
-            Expanded(
-              flex: 2,
-              child: Container(
-                padding: EdgeInsets.only(right: 4.0),
-                child: Text(
-                  '${this.product.aliasName}', 
-                  style: TextStyle(
-                    fontSize: AppDimens.font_16, 
-                    color: AppColors.descriptionFontColor,
-                    fontFamily: 'pixel',
-                    decoration: TextDecoration.none,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
+         
+            
+          ObjectUtil.isEmptyList(this.product.mark) ?  Container(): ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: 90.0,
+              minWidth: 40,
             ),
-          ObjectUtil.isEmptyList(this.product.mark) ?  Container(): SizedBox(
-            width: 120,
             child: MarkWidget(mark: this.product.mark[0],),
           ),
           this.type == 2 &&  this.product.mark.length > 1 ? 
-            SizedBox(
-              width: 120,
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 90.0,
+                minWidth: 40,
+              ),
               child: MarkWidget(mark: this.product.mark[1],),
             ) 
           : 
@@ -422,14 +432,15 @@ class ProductCard extends StatelessWidget{
                   fontStyle: FontStyle.normal,
                   fontFamily: 'pixel',
                   decoration: TextDecoration.none,
-                  fontSize: AppDimens.font_14,
+                  fontSize: AppDimens.font_18,
                   color: Colors.white,
                 ), 
                 overflow: TextOverflow.ellipsis, 
                 maxLines: 1,
                 textAlign: TextAlign.right,
               ),
-          ): Container(),
+          ):           
+          SelectOrderCountWidget(type: 2,product: this.product, width: 100.0, height: 40.0, unitPriceIndex: 0,),
         ],
       ),
     );

@@ -100,7 +100,7 @@ class _LotteryCirclePanState extends State<LotteryCirclePan> with SingleTickerPr
                   //   fit: BoxFit.fill,
                   // ),
                   child: CachedNetworkImage(
-                    imageUrl: '$Constant.DUMEI_RESOURCE_SERVER${itemModel.icon}',
+                    imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${itemModel.icon}',
                     fit: BoxFit.fill,
                     errorWidget: (BuildContext context, String url, o){
                       return Image.asset(

@@ -23,7 +23,7 @@ class MainBloc implements BlocBase {
   ComListBloc<OrderItem> orderListBloc = ComListBloc<OrderItem>(comList: null);
 
   /// 当前吧台
-  ComBloc<int>  currentDeskIndexBloc = ComBloc<int>(com: 0);
+  ComBloc<int>  currentDeskIndexBloc = ComBloc<int>(com: null);
 
   /// 中奖概率
   ComListBloc<LotteryItemModel> lotteryItemModelListBloc = ComListBloc<LotteryItemModel>(comList: null);

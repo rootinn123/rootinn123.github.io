@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/ui/lottery_rule_view_page.dart';
 import 'package:root_inn/ui/main_page.dart';
 import 'package:root_inn/ui/widgets/LotteryCircle.dart';
@@ -25,7 +26,7 @@ class LotteryViewPage extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: MainPage.appHeaderHeight,
+              top: AppConfig.appHeaderHeight,
               left: 0.0,
               right: 0.0,
               bottom: 0.0,

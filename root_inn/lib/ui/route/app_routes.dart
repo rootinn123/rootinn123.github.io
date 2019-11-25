@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:root_inn/data/models.dart';
 import 'package:root_inn/ui/lottery_rule_view_page.dart';
 import 'package:root_inn/ui/lottery_view_page.dart';
+import 'package:root_inn/ui/main_page.dart';
 import 'package:root_inn/ui/main_view_more_page.dart';
 import 'package:root_inn/ui/order_list_page.dart';
 import 'package:root_inn/ui/product_detail_page.dart.dart';
+
+import '../order_confirm_result_page.dart';
 
 
 class AppRoutes{
@@ -20,7 +23,11 @@ class AppRoutes{
     return _instance;
   }
 
+  Widget get mainPage => MainPage();
+
   Widget get orderListPage => const OrderListPage();
+
+   Widget get lotteryRuleViewPage => const LotteryRuleViewPage();
 
   Widget mainViewMorePage({@required Menu menu}) => MainViewMorePage(menu: menu, );
 
@@ -28,6 +35,7 @@ class AppRoutes{
 
   Widget get lotteryViewPage => const LotteryViewPage();
 
-  Widget get lotteryRuleViewPage => const LotteryRuleViewPage();
+  Widget get orderConfirmResultPage => OrderConfirmResultPage();
+
   
 }

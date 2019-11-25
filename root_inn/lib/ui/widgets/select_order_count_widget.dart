@@ -171,11 +171,13 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
               width: 30.0,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColors.cardBottomColor,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/subSign.png'),
-                  fit: BoxFit.fill
-                ),
+                color: Colors.transparent,
+              ),
+              child: Image.asset(
+                'assets/images/subSign.png',
+                  fit: BoxFit.fill,
+                  height: 20.0,
+                  width: 20.0,
               ),
             ),
           ),
@@ -190,7 +192,10 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
                 '${widget.product.unitPrice[widget.unitPriceIndex].checkCount}', 
                 style: TextStyle(
                   color: widget.product.unitPrice[widget.unitPriceIndex].checkCount > 0 ? AppColors.countColor : AppColors.descriptionFontColor, 
-                  fontSize: AppDimens.font_26
+                  fontSize: AppDimens.font_26,
+                  fontStyle: FontStyle.normal,
+                  fontFamily: 'pixel',
+                  decoration: TextDecoration.none,
                 ),),
             ),
           ),
@@ -201,11 +206,13 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
               width: 30.0,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColors.cardBottomColor,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/addSign.png'),
-                  fit: BoxFit.fill
-                ),
+                color: Colors.transparent,
+              ),
+              child: Image.asset(
+                'assets/images/addSign.png',
+                  fit: BoxFit.fill,
+                  height: 20.0,
+                  width: 20.0,
               ),
             ),
           ),

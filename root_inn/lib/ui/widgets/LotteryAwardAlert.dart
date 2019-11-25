@@ -80,7 +80,7 @@ class LotteryAwardAlert extends TransitionRoute {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              '恭喜抽中『' + itemModel.title + '』',
+              itemModel.title.indexOf('谢') >=0 ? '抽中『' + itemModel.title + '』' : '恭喜抽中『' + itemModel.title + '』',
               style: TextStyle(
                 color: Color(0xFFFF713F),
                 fontSize: 22,
@@ -113,7 +113,7 @@ class LotteryAwardAlert extends TransitionRoute {
                     alignment: Alignment.center,
                     color: Color(0XFFFF713F),
                     child: Text(
-                      '领取奖励',
+                      itemModel.title.indexOf('谢') >=0 ? '再接再励' : '领取奖励',
                       style: TextStyle(
                         color: Color(0xFFFFFFFF),
                         fontSize: 18,

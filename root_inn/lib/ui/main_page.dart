@@ -11,31 +11,43 @@ import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
 import 'package:root_inn/ui/main_detail_page.dart';
 import 'package:root_inn/ui/route/app_routes.dart';
+import 'package:root_inn/ui/widgets/widgets.dart';
 import 'package:root_inn/utils/navigator_util.dart';
 
 
 class MainPage extends StatelessWidget {
-  MainPage({Key key, this.title}) : super(key: key);
-  final String title;
 
-  static double appHeaderHeight;
-  static double bottomNaviHeight;  
 
   @override
   Widget build(BuildContext context) {
     LogUtil.v('MainPage----->Build--->');
-    AppConfig.appScreenHeight = ScreenUtil.getScreenH(context);
-    AppConfig.appScreenWidth = ScreenUtil.getScreenW(context);
-    AppConfig.appStatusBarHeight = ScreenUtil.getStatusBarH(context);
-
-    MainPage.appHeaderHeight =  AppConfig.appScreenHeight * AppConfig.appBarHeight + AppConfig.appStatusBarHeight;
-    MainPage.bottomNaviHeight = AppConfig.appScreenHeight * AppConfig.appBottomBarHeight;  
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         top: false,
         child: this._buildStructureWidget(context),
+        // child: Center(
+        //   child: GestureDetector(
+        //     onTap: (){
+        //       Navigator.of(context).push(
+        //         MaterialPageRoute(
+        //           builder: (BuildContext context){
+        //             return AppRoutes.getInstance().orderListPage;
+        //           },
+        //           settings: RouteSettings(),
+        //           maintainState: false
+        //         ),
+        //       );
+        //     },
+        //     child: Container(
+        //       height: 100.0,
+        //       width: 100.0,
+        //       color: Colors.blue,
+        //       child: Text('Demo1---->>>'),
+        //     ),
+        //   ),
+        // ),
+        
       ),
     );
   }
@@ -44,15 +56,17 @@ class MainPage extends StatelessWidget {
     LogUtil.v('_buildStructureWidget----->Build--->1');
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
     if(bloc.menulListBloc == null) ComListBloc<Menu>(comList: null);
-    if(ObjectUtil.isEmptyList(bloc.menulListBloc.comList )){
+    if(ObjectUtil.isEmptyList(bloc.menulListBloc.comList)){
       LogUtil.v('menulListBloc判断为空取数据');
       bloc.menulListBloc.getData(labelId: AppLocalLabel.InitialData, comReq: <String, dynamic>{});
     }
     if(ObjectUtil.isEmptyList(bloc.deskListBloc.comList )){
+      LogUtil.v('deskListBloc判断为空取数据');
       LogUtil.v('deskListBloc');
       bloc.deskListBloc.getData(labelId: AppLocalLabel.DeskData, comReq: <String, dynamic>{});
     }
      if(ObjectUtil.isEmptyList(bloc.lotteryItemModelListBloc.comList )){
+       LogUtil.v('lotteryItemModelListBloc判断为空取数据');
       LogUtil.v('lotteryItemModelListBloc');
       bloc.lotteryItemModelListBloc.getData(labelId: AppLocalLabel.LotteryData, comReq: <String, dynamic>{});
     }
@@ -71,7 +85,7 @@ class MainPage extends StatelessWidget {
               return Stack(
                 children: <Widget>[
                   this._buildPageWidget(context, menuList, index),
-                  this._buildHeaderWidget(context, menuList[index], index),
+                  MainPageHeaderWidget(menu: menuList[index],),
                   this._buildBottomNaviWidget(context, menuList, index),
                 ],
               );
@@ -83,56 +97,7 @@ class MainPage extends StatelessWidget {
 
   }
   /// 头部
-  Widget _buildHeaderWidget(BuildContext context, Menu menu, int index){
-    LogUtil.v('_buildHeaderWidget----->>>>>>$appHeaderHeight');
-    return Positioned(
-      top: 0.0,
-      left: 0.0,
-      right: 0.0,
-      // bottom: AppConfig.appScreenHeight * AppConfig.appBarHeight,
-      child: Container(
-        height: MainPage.appHeaderHeight,
-        padding: EdgeInsets.only(left: AppDimens.padding_30, right: AppDimens.padding_30, top: AppConfig.appStatusBarHeight),
-        decoration: BoxDecoration(
-          color: AppColors.topNaviColor,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('${menu.title}', style: TextStyle(fontSize: AppDimens.font_24),),
-            CachedNetworkImage(
-              imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_LOGO}',
-              height: 18.0,
-              fit: BoxFit.fitHeight,
-            ),
-            Container(
-              child: Row(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: (){
-                      NavigatorUtil.pushPage(context, AppRoutes.getInstance().orderListPage);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(right: 15.0),
-                      child: Image.asset('assets/images/shoppingCar.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      NavigatorUtil.pushPage(context, AppRoutes.getInstance().lotteryViewPage);
-                    },
-                    child: Container(
-                      child: Image.asset('assets/images/prize.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  
   /// 内容页
   Widget _buildPageWidget(BuildContext context, List<Menu> menuList, int index){
     List<Widget> pageList = <Widget>[];
@@ -160,7 +125,7 @@ class MainPage extends StatelessWidget {
     }
 
     Widget widget = Container(
-      height: MainPage.bottomNaviHeight,
+      height: AppConfig.bottomNaviHeight,
       decoration: BoxDecoration(
         color: AppColors.bottomNaviColor
       ),

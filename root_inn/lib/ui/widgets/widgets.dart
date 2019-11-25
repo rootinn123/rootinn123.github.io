@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/data/models.dart';
@@ -78,10 +79,12 @@ class MarkWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return  Container(
-      alignment: Alignment.center,
+      // width: 10,
+      // alignment: Alignment.center,
       margin: EdgeInsets.only(right: 4.0),
-      padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
+      padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
       decoration: BoxDecoration(
+        // color: Colors.red,
         borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius_10)),
         border: Border.all(color: AppColors.markFontColor, width: 0.5),
       ),
@@ -119,7 +122,7 @@ class Appheader extends StatelessWidget{
     return GestureDetector(
       onTap: () => Navigator.of(context).pop(),
       child: Container(
-        height: MainPage.appHeaderHeight,
+        height: AppConfig.appHeaderHeight,
         padding: EdgeInsets.only(left: AppDimens.padding_30, right: AppDimens.padding_30, top: AppConfig.appStatusBarHeight),
         decoration: BoxDecoration(
           color: this.bgColor,
@@ -132,8 +135,9 @@ class Appheader extends StatelessWidget{
               padding: EdgeInsets.only(right: 10.0),
               child: CachedNetworkImage(
                 imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_BACK}',
-                height: 20.0,
-                fit: BoxFit.fitHeight,
+                height: 28.0,
+                width: 28.0,
+                fit: BoxFit.fill,
               ),
             ),
             Text(
@@ -151,3 +155,94 @@ class Appheader extends StatelessWidget{
 
 }
 
+
+class MainPageHeaderWidget extends StatelessWidget{
+
+  const MainPageHeaderWidget({Key key, this.menu}) : super(key: key);
+  final Menu menu;
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildHeaderWidget(context);
+  }
+
+  Widget _buildHeaderWidget(BuildContext context){
+    LogUtil.v('_buildHeaderWidget----->>>>>>');
+    return Positioned(
+      top: 0.0,
+      left: 0.0,
+      right: 0.0,
+      // bottom: AppConfig.appScreenHeight * AppConfig.appBarHeight,
+      child: Container(
+        height: AppConfig.appHeaderHeight,
+        padding: EdgeInsets.only(left: AppDimens.padding_30, right: AppDimens.padding_30, top: AppConfig.appStatusBarHeight),
+        decoration: BoxDecoration(
+          color: AppColors.topNaviColor,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text('${menu.title}', style: TextStyle(fontSize: AppDimens.font_24),),
+            CachedNetworkImage(
+              imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_LOGO}',
+              height: 18.0,
+              fit: BoxFit.fitHeight,
+            ),
+            Container(
+              child: Row(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: (){
+                      // NavigatorUtil.pushPage(context, AppRoutes.getInstance().orderListPage);
+                     
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context){
+                            return AppRoutes.getInstance().orderListPage;
+                          },
+                          settings: RouteSettings(),
+                          maintainState: false
+                        ),
+                        
+                      );
+
+                      // Navigator.push(
+                      //   context, 
+                      //   PageRouteBuilder(
+                      //     opaque: false,
+                      //     transitionDuration: Duration(milliseconds: 300),
+                      //     pageBuilder: (_, __, ___) => AppRoutes.getInstance().orderListPage,
+                      //   ),
+                      // );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(right: 10.0),
+                      padding: EdgeInsets.symmetric(horizontal: 5.0),
+                      width: 40.0,
+                      height: 30.0,
+                      color: Colors.transparent,
+                      child: Image.asset('assets/images/shoppingCar.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      NavigatorUtil.pushPage(context, AppRoutes.getInstance().lotteryViewPage);
+                    },
+                    child: Container(
+                      width: 40.0,
+                      height: 30.0,
+                      padding: EdgeInsets.symmetric(horizontal: 5.0),
+                      color: Colors.transparent,
+                      child: Image.asset('assets/images/prize.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+  
+}

@@ -128,8 +128,11 @@ class ProductDetailPage extends StatelessWidget{
       child: Row(
         children: <Widget>[
           Text('${this.product.aliasName}', style: TextStyle(fontSize: AppDimens.font_10, color: AppColors.descriptionFontColor)),
-          ObjectUtil.isEmptyList(this.product.mark) ?  Container(): SizedBox(
-            width: 120,
+          ObjectUtil.isEmptyList(this.product.mark) ?  Container(): ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: 80.0,
+              minWidth: 40,
+            ),
             child: MarkWidget(mark: this.product.mark[0],),
           ),
           this.product.mark.length > 1 ? MarkWidget(mark: this.product.mark[1],) : Container(),
