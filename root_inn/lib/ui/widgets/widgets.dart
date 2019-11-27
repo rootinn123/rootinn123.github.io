@@ -175,72 +175,81 @@ class MainPageHeaderWidget extends StatelessWidget{
       // bottom: AppConfig.appScreenHeight * AppConfig.appBarHeight,
       child: Container(
         height: AppConfig.appHeaderHeight,
+        width: AppConfig.appScreenWidth,
         padding: EdgeInsets.only(left: AppDimens.padding_30, right: AppDimens.padding_30, top: AppConfig.appStatusBarHeight),
         decoration: BoxDecoration(
           color: AppColors.topNaviColor,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
+          alignment: Alignment.center,
           children: <Widget>[
-            Text('${menu.title}', style: TextStyle(fontSize: AppDimens.font_24),),
+            Positioned.fill(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text('${menu.title}', style: TextStyle(fontSize: AppDimens.font_24),),
+                  Container(
+                    child: Row(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: (){
+                            // NavigatorUtil.pushPage(context, AppRoutes.getInstance().orderListPage);
+                          
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (BuildContext context){
+                                  return AppRoutes.getInstance().orderListPage;
+                                },
+                                settings: RouteSettings(),
+                                maintainState: false
+                              ),
+                              
+                            );
+
+                            // Navigator.push(
+                            //   context, 
+                            //   PageRouteBuilder(
+                            //     opaque: false,
+                            //     transitionDuration: Duration(milliseconds: 300),
+                            //     pageBuilder: (_, __, ___) => AppRoutes.getInstance().orderListPage,
+                            //   ),
+                            // );
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10.0),
+                            padding: EdgeInsets.symmetric(horizontal: 5.0),
+                            width: 40.0,
+                            height: 30.0,
+                            color: Colors.transparent,
+                            child: Image.asset('assets/images/shoppingCar.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: (){
+                            NavigatorUtil.pushPage(context, AppRoutes.getInstance().lotteryViewPage);
+                          },
+                          child: Container(
+                            width: 40.0,
+                            height: 30.0,
+                            padding: EdgeInsets.symmetric(horizontal: 5.0),
+                            color: Colors.transparent,
+                            child: Image.asset('assets/images/prize.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  
+                ],
+              ),
+            ),
             CachedNetworkImage(
               imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_LOGO}',
               height: 18.0,
               fit: BoxFit.fitHeight,
             ),
-            Container(
-              child: Row(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: (){
-                      // NavigatorUtil.pushPage(context, AppRoutes.getInstance().orderListPage);
-                     
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context){
-                            return AppRoutes.getInstance().orderListPage;
-                          },
-                          settings: RouteSettings(),
-                          maintainState: false
-                        ),
-                        
-                      );
-
-                      // Navigator.push(
-                      //   context, 
-                      //   PageRouteBuilder(
-                      //     opaque: false,
-                      //     transitionDuration: Duration(milliseconds: 300),
-                      //     pageBuilder: (_, __, ___) => AppRoutes.getInstance().orderListPage,
-                      //   ),
-                      // );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(right: 10.0),
-                      padding: EdgeInsets.symmetric(horizontal: 5.0),
-                      width: 40.0,
-                      height: 30.0,
-                      color: Colors.transparent,
-                      child: Image.asset('assets/images/shoppingCar.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      NavigatorUtil.pushPage(context, AppRoutes.getInstance().lotteryViewPage);
-                    },
-                    child: Container(
-                      width: 40.0,
-                      height: 30.0,
-                      padding: EdgeInsets.symmetric(horizontal: 5.0),
-                      color: Colors.transparent,
-                      child: Image.asset('assets/images/prize.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
-                    ),
-                  )
-                ],
-              ),
-            )
           ],
-        ),
+        )
       ),
     );
   }
