@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
     bloc.initAppData();
     return MaterialApp(
+      showPerformanceOverlay: false,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

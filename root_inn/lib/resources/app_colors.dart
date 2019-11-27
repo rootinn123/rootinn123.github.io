@@ -24,8 +24,8 @@ import 'package:flutter/material.dart';
 //
 class AppColors {
   static const Color primaryColor = Color(0xFF000000);
-  static const Color topNaviColor = Color(0xFF151A27);
-  static const Color bottomNaviColor = Color(0xCC151A27);
+  static const Color topNaviColor = Color.fromRGBO(22, 26, 39, 1);
+  static const Color bottomNaviColor = Color.fromRGBO(22, 26, 39, 1);
 
   static const Color primaryFontColor = Color(0xFFFFFFFF);
   static const Color selectedFontColor = Color(0xFF00FDFF);

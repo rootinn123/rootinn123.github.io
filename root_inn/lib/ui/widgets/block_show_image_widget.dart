@@ -178,9 +178,9 @@ class ProductCard extends StatelessWidget{
   
   Widget _buildDetailBackgroudWidget(BuildContext context){
     return Positioned.fill(
-      child: ClipRect(  //裁切长方形
-        child: BackdropFilter(   //背景滤镜器
-          filter: ImageFilter.blur(sigmaX: 10.0,sigmaY: 10.0), //图片模糊过滤，横向竖向都设置5.0
+      // child: ClipRect(  //裁切长方形
+      //   child: BackdropFilter(   //背景滤镜器
+      //     filter: ImageFilter.blur(sigmaX: 10.0,sigmaY: 10.0), //图片模糊过滤，横向竖向都设置5.0
           child: GestureDetector(
             onTap: (){
               LogUtil.v('pop===========>>>');
@@ -190,8 +190,8 @@ class ProductCard extends StatelessWidget{
               color: Colors.black.withOpacity(0.6),
             ),
           ),
-        )
-      )
+      //   )
+      // )
     );
   }
 

@@ -127,7 +127,7 @@ class MainPage extends StatelessWidget {
     Widget widget = Container(
       height: AppConfig.bottomNaviHeight,
       decoration: BoxDecoration(
-        color: AppColors.bottomNaviColor
+        color: AppColors.bottomNaviColor.withOpacity(0.98)
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -138,12 +138,13 @@ class MainPage extends StatelessWidget {
       bottom: 0.0,
       left: 0.0,
       right: 0.0,
-      child: ClipRect(  //裁切长方形
-        child: BackdropFilter(   //背景滤镜器
-          filter: ImageFilter.blur(sigmaX: 10.0,sigmaY: 10.0), //图片模糊过滤，横向竖向都设置5.0
-          child: widget,
-        )
-      ),
+      child: widget,
+      // child: ClipRect(  //裁切长方形
+      //   child: BackdropFilter(   //背景滤镜器
+      //     filter: ImageFilter.blur(sigmaX: 10.0,sigmaY: 10.0), //图片模糊过滤，横向竖向都设置5.0
+      //     child: widget,
+      //   )
+      // ),
     );
   }
 

@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 class Constant {
 
   static const String APP_NAME = 'RootInn';
-  static const bool DEBUG_MODE = true;
+  static const bool DEBUG_MODE = false;
   static const int STATUS_SUCCESS = 0;
   static const String SERVER_ADDRESS = DUMEI_SERVER_PRD;
 
