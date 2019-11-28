@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:root_inn/blocs/bloc_index.dart';
@@ -5,31 +7,70 @@ import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/data/models.dart';
 import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
-import 'package:root_inn/ui/route/app_routes.dart';
 import 'package:root_inn/ui/widgets/widgets.dart';
 
-class OrderListPage extends StatelessWidget{
+class OrderListPage extends StatefulWidget{
 
   const OrderListPage({Key key}): super(key: key);
 
-  
+  @override
+  _OrderListPageState createState() => _OrderListPageState();
+
+}
+class _OrderListPageState extends State<OrderListPage>{ 
+
+  bool hiddenConfirm = true;
 
   @override
   Widget build(BuildContext context) {
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
     return Scaffold(
       backgroundColor: Colors.black,
-      body: StreamBuilder(
-        stream: bloc.orderListBloc.comListStream,
-        builder: (BuildContext context, AsyncSnapshot<List<OrderItem>> snapshot){
-          List<OrderItem> orderList = snapshot.data ?? <OrderItem>[];
-          LogUtil.v('orderList---lengh: ${orderList.length}');
-          double amount = 0.0;
-          for(OrderItem orderItem in orderList){
-            amount += orderItem.product.unitPrice[orderItem.unitPriceItemIndex].price * orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount;
-          }
-          return this.buildContent(context, bloc, orderList, orderList.length,  amount);
-        },
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Positioned.fill(
+            child: StreamBuilder(
+              stream: bloc.orderListBloc.comListStream,
+              builder: (BuildContext context, AsyncSnapshot<List<OrderItem>> snapshot){
+                List<OrderItem> orderList = snapshot.data ?? <OrderItem>[];
+                LogUtil.v('orderList---lengh: ${orderList.length}');
+                double amount = 0.0;
+                for(OrderItem orderItem in orderList){
+                  amount += orderItem.product.unitPrice[orderItem.unitPriceItemIndex].price * orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount;
+                }
+                return this.buildContent(context, bloc, orderList, orderList.length,  amount);
+              },
+            ),
+          ),
+
+          AnimatedPositioned(
+            left: 0.0,
+            right: 0.0,
+            top: this.hiddenConfirm ? -1 * AppConfig.appScreenHeight : 0.0,
+            duration: Duration(milliseconds: 10),
+            child: GestureDetector(
+                onTap: (){
+                  setState(() {
+                    this.hiddenConfirm = true;
+                  });
+                },
+                // child:Clip Rect(  //裁切长方形
+                //   child: BackdropFilter(   //背景滤镜器
+                //     filter: ImageFilter.blur(sigmaX: 10.0,sigmaY: 10.0), //图片模糊过滤，横向竖向都设置5.0
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: AppConfig.appScreenWidth,
+                      height: AppConfig.appScreenHeight,
+                      color: AppColors.primaryColor.withOpacity(0.5),
+                      child: this._buildConfirmContent(context, bloc),
+                    ),
+                  )
+                ),
+          //   ),
+          // )
+
+        ],
       ),
     );
   }
@@ -124,14 +165,7 @@ class OrderListPage extends StatelessWidget{
                 GestureDetector(
                   onTap: (){
                     if(ObjectUtil.isEmptyList(bloc.orderListBloc.comList)) return;
-                    Navigator.push(
-                      context, 
-                      PageRouteBuilder(
-                        opaque: false,
-                        transitionDuration: Duration(milliseconds: 300),
-                        pageBuilder: (_, __, ___) => AppRoutes.getInstance().orderConfirmResultPage,
-                      ),
-                    );
+                    setState(() => this.hiddenConfirm = false);
                     
 
                     // if(!ObjectUtil.isEmptyList(bloc.orderListBloc.comList)){
@@ -269,6 +303,75 @@ class OrderListPage extends StatelessWidget{
                 ),
               ],
             ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildConfirmContent(BuildContext context, MainBloc bloc){
+    return Container(
+      width: 350.0,
+      height: 250.0,
+      padding: EdgeInsets.only(top: 40.0),
+      decoration: BoxDecoration(
+        color: AppColors.topNaviColor,
+        borderRadius: BorderRadius.all(Radius.circular(8.0))
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Image.asset('assets/images/happy.png', width: 80.0, height: 80.0, fit: BoxFit.fill,),
+          Container(
+            alignment: Alignment.center,
+            height: 65.0,
+            decoration: BoxDecoration(
+              // border: Border(bottom: BorderSide(width: 1.0, color: AppColors.primaryColor))
+            ),
+            padding: EdgeInsets.only(top: 20.0,bottom: 10.0),
+            child: Text('确认该订单？', style: TextStyle(fontSize: AppDimens.font_24),),
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      this.hiddenConfirm = true;
+                    });
+                  },
+                  child: Container(
+                    height: 60.0,
+                    color: Colors.transparent,
+                    alignment: Alignment.center,
+                    child: Text('No', style: TextStyle(fontSize: AppDimens.font_24),),
+                  ),
+                )
+              ),
+              Expanded(
+                child: GestureDetector(
+                  onTap: (){
+                    if(!ObjectUtil.isEmptyList(bloc.orderListBloc.comList)){
+                      for(OrderItem orderItem in bloc.orderListBloc.comList){
+                        orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount = 0;
+                      }
+                    }
+                    bloc.orderListBloc.comList = <OrderItem>[];
+                    bloc.currentDeskIndexBloc.com = null;
+                    bloc.currentDeskIndexBloc.comData.sink.add(bloc.currentDeskIndexBloc.com);
+                    bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList);
+                    bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    height: 60.0,
+                    color: Colors.transparent,
+                    alignment: Alignment.center,
+                    child: Text('Yes', style: TextStyle(fontSize: AppDimens.font_24),),
+                  ),
+                )
+              ),
+            ],
           )
         ],
       ),
