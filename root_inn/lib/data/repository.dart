@@ -31,7 +31,7 @@ class DumeiRepository {
       DumeiApi.getPath(path: DumeiApi.INITIAL_DATA),
       queryParameters:comReq
     );
-    LogUtil.e('response----->>>>>${response.data.runtimeType}');
+    LogUtil.e('getInitialData----response----->>>>>${response.data.runtimeType}');
     List<AppMenuType> list;
     if(null != response.data) {
       SpHelper.putObject<String>(Constant.KEY_INITIAL_DATA, jsonEncode(response.data));
@@ -45,13 +45,13 @@ class DumeiRepository {
 
   /// 获取Menu
   Future<List<Menu>> getMenuData(String url, Map<String, dynamic> comReq) async {
-    LogUtil.e('repo--getInitialData----->>>>>$comReq');
+    LogUtil.e('repo--getMenuData-----$url>>>>>$comReq');
     Response response = await dioUtil.requestPure(
       Method.get, 
-      DumeiApi.getPath(path: DumeiApi.INITIAL_DATA),
+      url,
       queryParameters:comReq
     );
-    LogUtil.e('response----->>>>>${response.data.runtimeType}');
+    LogUtil.e('getMenuData---response----->>>>>${response.data.runtimeType}');
     Map<String, dynamic> resultMap = response.data;
     if(null != resultMap) {
       SpHelper.putObject<String>(Constant.KEY_INITIAL_DATA, jsonEncode(resultMap));

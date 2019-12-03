@@ -26,13 +26,15 @@ class AppMenuPage extends StatelessWidget{
         stream: bloc.appMenuTypeListBloc.comListStream,
         builder: (BuildContext context, AsyncSnapshot<List<AppMenuType>> snapshot){
           if(ObjectUtil.isEmptyList(snapshot.data)) return Container();
-          return Container(
-            height: AppConfig.appScreenHeight,
-            width: AppConfig.appScreenWidth,
-            padding: EdgeInsets.only(top: 200.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: this._buildContentWidget(context, bloc, snapshot.data),
+          return SingleChildScrollView(
+            child: Container(
+              // height: AppConfig.appScreenHeight,
+              width: AppConfig.appScreenWidth,
+              padding: EdgeInsets.only(top: 200.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: this._buildContentWidget(context, bloc, snapshot.data),
+              ),
             ),
           );
         },
@@ -74,9 +76,9 @@ class AppMenuPage extends StatelessWidget{
         alignment: Alignment.center,
         height: 100.0,
         width: 350.0,
-        padding: EdgeInsets.only(bottom: 18.0),
+        margin: EdgeInsets.only(bottom: 15.0),
         decoration: BoxDecoration(
-          border: Border.all(width: 1.0, color: AppConfig.deskColor[0]),
+          border: Border.all(width: 1.0, color: AppConfig.deskColor[1]),
           borderRadius: BorderRadius.all(Radius.circular(2.0)),
         ),
         child: Column(

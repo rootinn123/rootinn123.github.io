@@ -199,9 +199,11 @@ class MainPageHeaderWidget extends StatelessWidget{
                       }
                       this.bloc.orderListBloc.comList = <OrderItem>[];
                       this.bloc.currentDeskIndexBloc.com = null;
+                      this.bloc.currentDeskIndexBloc.com = 0;
                       this.bloc.currentDeskIndexBloc.comData.sink.add(bloc.currentDeskIndexBloc.com);
                       this.bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList);
                       this.bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
+                      this.bloc.currentDeskIndexBloc.comData.sink.add(this.bloc.currentDeskIndexBloc.com);
                       Navigator.of(context).pop();
                     },
                     child: Row(
