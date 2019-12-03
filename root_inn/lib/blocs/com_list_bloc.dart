@@ -58,7 +58,7 @@ class ComListBloc<T> implements BlocBase {
 
   Future _getInitialData(String labelId) {
 
-    return this._dumeiRepository.getInitialData(null).then((List<Menu> result){
+    return this._dumeiRepository.getInitialData(null).then((List<AppMenuType> result){
       LogUtil.v('_getInitialData----->>>>>>handle--->${result.length}');
      this.handleResultData(result);
     }).catchError((e){

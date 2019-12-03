@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:root_inn/data/models.dart';
+import 'package:root_inn/ui/app_menu_page.dart';
 import 'package:root_inn/ui/lottery_rule_view_page.dart';
 import 'package:root_inn/ui/lottery_view_page.dart';
 import 'package:root_inn/ui/main_page.dart';
@@ -23,11 +24,13 @@ class AppRoutes{
     return _instance;
   }
 
+  Widget get appMenuPage => AppMenuPage();
+
   Widget get mainPage => MainPage();
 
   Widget get orderListPage => const OrderListPage();
 
-   Widget get lotteryRuleViewPage => const LotteryRuleViewPage();
+  Widget get lotteryRuleViewPage => const LotteryRuleViewPage();
 
   Widget mainViewMorePage({@required Menu menu}) => MainViewMorePage(menu: menu, );
 

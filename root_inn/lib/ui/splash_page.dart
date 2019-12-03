@@ -18,15 +18,24 @@ class SplashPage extends StatelessWidget {
     AppConfig.appHeaderHeight =  AppConfig.appScreenHeight * AppConfig.appBarHeight + AppConfig.appStatusBarHeight;
     AppConfig.bottomNaviHeight = AppConfig.appScreenHeight * AppConfig.appBottomBarHeight; 
     Future.delayed(Duration(milliseconds: 400)).then((_){
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (BuildContext context){
-            return AppRoutes.getInstance().mainPage;
-          },
-          settings: RouteSettings(isInitialRoute: true),
-          maintainState: false,
-        ),
+      // Navigator.of(context).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (BuildContext context){
+      //       return AppRoutes.getInstance().mainPage;
+      //     },
+      //     settings: RouteSettings(isInitialRoute: true),
+      //     maintainState: false,
+      //   ),
+      // );
+      Navigator.pushReplacement(
+        context, 
+        PageRouteBuilder(
+          opaque: false,
+          transitionDuration: Duration(milliseconds: 300),
+          pageBuilder: (_, __, ___) => AppRoutes.getInstance().appMenuPage,
+        )
       );
+
     });
     return Scaffold(
       body: Center(

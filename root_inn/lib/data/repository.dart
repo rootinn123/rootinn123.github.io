@@ -22,8 +22,29 @@ class DumeiRepository {
     }
     return _instance;
   }
+
+   /// 获取Menu
+  Future<List<AppMenuType>> getInitialData(Map<String, dynamic> comReq) async {
+    LogUtil.e('repo--getInitialData----->>>>>$comReq');
+    Response response = await dioUtil.requestPure(
+      Method.get, 
+      DumeiApi.getPath(path: DumeiApi.INITIAL_DATA),
+      queryParameters:comReq
+    );
+    LogUtil.e('response----->>>>>${response.data.runtimeType}');
+    List<AppMenuType> list;
+    if(null != response.data) {
+      SpHelper.putObject<String>(Constant.KEY_INITIAL_DATA, jsonEncode(response.data));
+      List<Map<String, dynamic>> appMenuTypeList = List.castFrom(response.data);
+      list = appMenuTypeList.map((Map<String, dynamic> map){
+        return AppMenuType.fromJson(map);
+      }).toList();
+    }
+    return list;
+  }
+
   /// 获取Menu
-  Future<List<Menu>> getInitialData(Map<String, dynamic> comReq) async {
+  Future<List<Menu>> getMenuData(String url, Map<String, dynamic> comReq) async {
     LogUtil.e('repo--getInitialData----->>>>>$comReq');
     Response response = await dioUtil.requestPure(
       Method.get, 

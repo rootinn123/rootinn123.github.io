@@ -10,9 +10,7 @@ import 'package:root_inn/data/models.dart';
 import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
 import 'package:root_inn/ui/main_detail_page.dart';
-import 'package:root_inn/ui/route/app_routes.dart';
 import 'package:root_inn/ui/widgets/widgets.dart';
-import 'package:root_inn/utils/navigator_util.dart';
 
 
 class MainPage extends StatelessWidget {
@@ -55,21 +53,21 @@ class MainPage extends StatelessWidget {
   Widget _buildStructureWidget(BuildContext context){
     LogUtil.v('_buildStructureWidget----->Build--->1');
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
-    if(bloc.menulListBloc == null) ComListBloc<Menu>(comList: null);
-    if(ObjectUtil.isEmptyList(bloc.menulListBloc.comList)){
-      LogUtil.v('menulListBloc判断为空取数据');
-      bloc.menulListBloc.getData(labelId: AppLocalLabel.InitialData, comReq: <String, dynamic>{});
-    }
-    if(ObjectUtil.isEmptyList(bloc.deskListBloc.comList )){
-      LogUtil.v('deskListBloc判断为空取数据');
-      LogUtil.v('deskListBloc');
-      bloc.deskListBloc.getData(labelId: AppLocalLabel.DeskData, comReq: <String, dynamic>{});
-    }
-     if(ObjectUtil.isEmptyList(bloc.lotteryItemModelListBloc.comList )){
-       LogUtil.v('lotteryItemModelListBloc判断为空取数据');
-      LogUtil.v('lotteryItemModelListBloc');
-      bloc.lotteryItemModelListBloc.getData(labelId: AppLocalLabel.LotteryData, comReq: <String, dynamic>{});
-    }
+    // if(bloc.menulListBloc == null) ComListBloc<Menu>(comList: null);
+    // if(ObjectUtil.isEmptyList(bloc.menulListBloc.comList)){
+    //   LogUtil.v('menulListBloc判断为空取数据');
+    //   bloc.menulListBloc.getData(labelId: AppLocalLabel.InitialData, comReq: <String, dynamic>{});
+    // }
+    // if(ObjectUtil.isEmptyList(bloc.deskListBloc.comList )){
+    //   LogUtil.v('deskListBloc判断为空取数据');
+    //   LogUtil.v('deskListBloc');
+    //   bloc.deskListBloc.getData(labelId: AppLocalLabel.DeskData, comReq: <String, dynamic>{});
+    // }
+    //  if(ObjectUtil.isEmptyList(bloc.lotteryItemModelListBloc.comList )){
+    //    LogUtil.v('lotteryItemModelListBloc判断为空取数据');
+    //   LogUtil.v('lotteryItemModelListBloc');
+    //   bloc.lotteryItemModelListBloc.getData(labelId: AppLocalLabel.LotteryData, comReq: <String, dynamic>{});
+    // }
     LogUtil.v('_buildStructureWidget----->Build--->2');
     return StreamBuilder(
       stream: bloc.menulListBloc.comListStream,
@@ -85,7 +83,7 @@ class MainPage extends StatelessWidget {
               return Stack(
                 children: <Widget>[
                   this._buildPageWidget(context, menuList, index),
-                  MainPageHeaderWidget(menu: menuList[index],),
+                  MainPageHeaderWidget(menu: menuList[index], bloc: bloc,),
                   this._buildBottomNaviWidget(context, menuList, index),
                 ],
               );

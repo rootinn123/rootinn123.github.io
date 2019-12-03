@@ -13,6 +13,9 @@ class MainBloc implements BlocBase {
   /// 首页bottomNavi下标
   ComBloc<int>  mainBottomNaviIndexBloc = ComBloc<int>(com: 0);
 
+  /// 初始化数据
+  ComListBloc<AppMenuType> appMenuTypeListBloc = ComListBloc<AppMenuType>(comList: null);
+
   /// 菜单
   ComListBloc<Menu> menulListBloc = ComListBloc<Menu>(comList: null);
 

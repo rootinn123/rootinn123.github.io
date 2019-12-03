@@ -313,3 +313,47 @@ class LotteryItemModel {
     return jsonEncode(this);
   }
 }
+
+
+class AppMenuType {
+  final int id;
+  final String name;
+  final String aliasName;
+  final String timeSlot;
+  final String url;
+  final String remark;
+  List<Menu> menuList;
+
+  AppMenuType({
+    this.id,
+    this.name, 
+    this.aliasName,
+    this.timeSlot,
+    this.url, 
+    this.remark
+  });
+
+  AppMenuType.fromJson(Map<String, dynamic> jsonData)
+  : 
+    id = jsonData['id'],
+    name = jsonData['name'],
+    aliasName = jsonData['aliasName'],
+    timeSlot = jsonData['timeSlot'],
+    url = jsonData['url'],
+    remark = jsonData['remark']
+  ;
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'aliasName': aliasName,
+    'timeSlot': timeSlot,
+    'url': url,
+    'remark': remark,
+  };
+
+  @override
+  String toString() {
+    return jsonEncode(this);
+  }
+}

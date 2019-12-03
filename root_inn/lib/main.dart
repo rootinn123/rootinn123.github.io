@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:root_inn/blocs/bloc_index.dart';
 import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/resources/app_colors.dart';
-import 'package:root_inn/ui/demo.dart';
-import 'package:root_inn/ui/main_page.dart';
 import 'package:root_inn/ui/splash_page.dart';
 
 Future main() async {
@@ -27,7 +25,7 @@ class MyApp extends StatelessWidget {
     LogUtil.e('MyApp----->>>build');
     LogUtil.debuggable = Constant.DEBUG_MODE;
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
-    bloc.initAppData();
+    // bloc.initAppData();
     return MaterialApp(
       showPerformanceOverlay: false,
       debugShowCheckedModeBanner: false,

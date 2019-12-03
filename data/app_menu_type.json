@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "name": "LUNCH",
+        "aliasName": "午餐",
+        "timeSlot": "11:00-14:00",
+        "url": "data/menu_lunch.json",
+        "remark": ""
+    },
+    {
+        "id": 2,
+        "name": "AFTERNOON TEA",
+        "aliasName": "下午茶",
+        "timeSlot": "14:30-16:30",
+        "url": "data/menu_afternoon_tea.json",
+        "remark": ""
+    },
+    {
+        "id": 3,
+        "name": "DINNER",
+        "aliasName": "晚餐",
+        "timeSlot": "17:00-21:30",
+        "url": "data/menu_dinner.json",
+        "remark": ""
+    },
+    {
+        "id": 4,
+        "name": "BAR TIME",
+        "aliasName": "酒吧",
+        "timeSlot": "21:30-later",
+        "url": "data/menu_bar_time.json",
+        "remark": ""
+    }
+]

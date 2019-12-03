@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:root_inn/blocs/main_bloc.dart';
 import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/data/models.dart';
 import 'package:root_inn/resources/app_colors.dart';
@@ -158,8 +159,9 @@ class Appheader extends StatelessWidget{
 
 class MainPageHeaderWidget extends StatelessWidget{
 
-  const MainPageHeaderWidget({Key key, this.menu}) : super(key: key);
+  const MainPageHeaderWidget({Key key, @required this.menu, @required this.bloc}) : super(key: key);
   final Menu menu;
+  final MainBloc bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +189,38 @@ class MainPageHeaderWidget extends StatelessWidget{
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text('${menu.title}', style: TextStyle(fontSize: AppDimens.font_24),),
+                  
+                  GestureDetector(
+                    onTap: (){
+                      if(!ObjectUtil.isEmptyList(bloc.orderListBloc.comList)){
+                        for(OrderItem orderItem in bloc.orderListBloc.comList){
+                          orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount = 0;
+                        }
+                      }
+                      this.bloc.orderListBloc.comList = <OrderItem>[];
+                      this.bloc.currentDeskIndexBloc.com = null;
+                      this.bloc.currentDeskIndexBloc.comData.sink.add(bloc.currentDeskIndexBloc.com);
+                      this.bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList);
+                      this.bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
+                      Navigator.of(context).pop();
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          color: Colors.transparent,
+                          padding: EdgeInsets.only(right: 10.0),
+                          child: CachedNetworkImage(
+                            imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_BACK}',
+                            height: 28.0,
+                            width: 28.0,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Text('${menu.title}', style: TextStyle(fontSize: AppDimens.font_24),),
+                      ],
+                    ),
+                  ),
+
                   Container(
                     child: Row(
                       children: <Widget>[
