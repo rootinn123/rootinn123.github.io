@@ -192,18 +192,6 @@ class MainPageHeaderWidget extends StatelessWidget{
                   
                   GestureDetector(
                     onTap: (){
-                      if(!ObjectUtil.isEmptyList(bloc.orderListBloc.comList)){
-                        for(OrderItem orderItem in bloc.orderListBloc.comList){
-                          orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount = 0;
-                        }
-                      }
-                      this.bloc.orderListBloc.comList = <OrderItem>[];
-                      this.bloc.currentDeskIndexBloc.com = null;
-                      this.bloc.currentDeskIndexBloc.com = 0;
-                      this.bloc.currentDeskIndexBloc.comData.sink.add(bloc.currentDeskIndexBloc.com);
-                      this.bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList);
-                      this.bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
-                      this.bloc.currentDeskIndexBloc.comData.sink.add(this.bloc.currentDeskIndexBloc.com);
                       Navigator.of(context).pop();
                     },
                     child: Row(
@@ -241,14 +229,6 @@ class MainPageHeaderWidget extends StatelessWidget{
                               
                             );
 
-                            // Navigator.push(
-                            //   context, 
-                            //   PageRouteBuilder(
-                            //     opaque: false,
-                            //     transitionDuration: Duration(milliseconds: 300),
-                            //     pageBuilder: (_, __, ___) => AppRoutes.getInstance().orderListPage,
-                            //   ),
-                            // );
                           },
                           child: Container(
                             margin: EdgeInsets.only(right: 10.0),

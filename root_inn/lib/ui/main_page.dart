@@ -13,8 +13,38 @@ import 'package:root_inn/ui/main_detail_page.dart';
 import 'package:root_inn/ui/widgets/widgets.dart';
 
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
 
+}
+class _MainPageState extends State<MainPage>{
+  MainBloc bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    this.bloc = BlocProvider.of<MainBloc>(context);
+  }
+  @override
+  void dispose() {
+    if(null != bloc){
+      if(!ObjectUtil.isEmptyList(bloc.orderListBloc.comList)){
+        for(OrderItem orderItem in bloc.orderListBloc.comList){
+          orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount = 0;
+        }
+      }
+      this.bloc.orderListBloc.comList = <OrderItem>[];
+      this.bloc.currentDeskIndexBloc.com = null;
+      this.bloc.mainBottomNaviIndexBloc.com = 0;
+      this.bloc.currentDeskIndexBloc.comData.sink.add(bloc.currentDeskIndexBloc.com);
+      this.bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList);
+      this.bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
+      this.bloc.mainBottomNaviIndexBloc.comData.sink.add(this.bloc.mainBottomNaviIndexBloc.com);
+      LogUtil.v('bloc.currentDeskIndexBloc.com---pop->>>${bloc.currentDeskIndexBloc.com}');
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +82,7 @@ class MainPage extends StatelessWidget {
 
   Widget _buildStructureWidget(BuildContext context){
     LogUtil.v('_buildStructureWidget----->Build--->1');
-    final MainBloc bloc = BlocProvider.of<MainBloc>(context);
+    
     // if(bloc.menulListBloc == null) ComListBloc<Menu>(comList: null);
     // if(ObjectUtil.isEmptyList(bloc.menulListBloc.comList)){
     //   LogUtil.v('menulListBloc判断为空取数据');

@@ -1,4 +1,5 @@
 import 'package:flustars/flustars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:root_inn/blocs/bloc_index.dart';
 import 'package:root_inn/common/commom.dart';
@@ -9,6 +10,7 @@ import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
 import 'package:root_inn/ui/route/app_routes.dart';
 import 'package:root_inn/utils/navigator_util.dart';
+import 'package:tip_dialog/tip_dialog.dart';
 
 class AppMenuPage extends StatelessWidget{
 
@@ -18,14 +20,23 @@ class AppMenuPage extends StatelessWidget{
   Widget build(BuildContext context) {
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
     if(null == bloc.appMenuTypeListBloc.comList){
+      LogUtil.v('appMenuTypeListBloc');
       bloc.appMenuTypeListBloc.getData(labelId: AppLocalLabel.InitialData, comReq: <String, dynamic>{});
     } 
+    if(ObjectUtil.isEmptyList(bloc.deskListBloc.comList )){
+      LogUtil.v('deskListBloc判断为空取数据');
+      bloc.deskListBloc.getData(labelId: AppLocalLabel.DeskData, comReq: <String, dynamic>{});
+    }
+     if(ObjectUtil.isEmptyList(bloc.lotteryItemModelListBloc.comList )){
+      LogUtil.v('lotteryItemModelListBloc判断为空取数据');
+      bloc.lotteryItemModelListBloc.getData(labelId: AppLocalLabel.LotteryData, comReq: <String, dynamic>{});
+    }
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: StreamBuilder(
         stream: bloc.appMenuTypeListBloc.comListStream,
         builder: (BuildContext context, AsyncSnapshot<List<AppMenuType>> snapshot){
-          if(ObjectUtil.isEmptyList(snapshot.data)) return Container();
+          if(ObjectUtil.isEmptyList(snapshot.data)) return Center(child:CupertinoActivityIndicator(),);
           return SingleChildScrollView(
             child: Container(
               // height: AppConfig.appScreenHeight,
@@ -63,7 +74,9 @@ class AppMenuPage extends StatelessWidget{
           return;
         }
         Map<String, dynamic> comReq = {};
+        TipDialogHelper.loading(context, "Loading");
         DumeiRepository.getInstance().getMenuData(DumeiApi.getPath(path: appMenuType.url),comReq).then((List<Menu> menuList){
+          TipDialogHelper.dismiss(context);
           appMenuType.menuList = menuList;
           bloc.appMenuTypeListBloc.comListData.sink.add(bloc.appMenuTypeListBloc.comList);
 
@@ -75,7 +88,7 @@ class AppMenuPage extends StatelessWidget{
       child: Container(
         alignment: Alignment.center,
         height: 100.0,
-        width: 350.0,
+        width: 400.0,
         margin: EdgeInsets.only(bottom: 15.0),
         decoration: BoxDecoration(
           border: Border.all(width: 1.0, color: AppConfig.deskColor[1]),
@@ -86,7 +99,7 @@ class AppMenuPage extends StatelessWidget{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text('${appMenuType.name}', style: TextStyle(fontSize: AppDimens.font_26),),
-            Container(height: 5.0,),
+            Container(height: 3.0,),
             Text('${appMenuType.aliasName}/${appMenuType.timeSlot}', style: TextStyle(fontSize: AppDimens.font_18),),
           ],
         ),
@@ -97,7 +110,7 @@ class AppMenuPage extends StatelessWidget{
   Widget _buildHeaderWidget(){
     return Padding(
       padding: EdgeInsets.only(bottom: 35.0),
-      child: Image.asset('assets/images/logo.png', height: 100, fit: BoxFit.fitHeight,),
+      child: Image.asset('assets/images/logo.png', height: 64, fit: BoxFit.fitHeight,),
     );
   }
 

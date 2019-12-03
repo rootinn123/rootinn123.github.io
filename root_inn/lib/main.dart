@@ -5,6 +5,7 @@ import 'package:root_inn/blocs/bloc_index.dart';
 import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/ui/splash_page.dart';
+import 'package:tip_dialog/tip_dialog.dart';
 
 Future main() async {
   
@@ -26,22 +27,24 @@ class MyApp extends StatelessWidget {
     LogUtil.debuggable = Constant.DEBUG_MODE;
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
     // bloc.initAppData();
-    return MaterialApp(
-      showPerformanceOverlay: false,
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        fontFamily: "pixel",
-        brightness: Brightness.dark,
-        primaryColor: AppColors.primaryColor,
-        cardColor: AppColors.topNaviColor,
-        textTheme: TextTheme(
-          body1: TextStyle(decoration: TextDecoration.none)
-        )
-      ),
-      home: SplashPage(),
-      // home: MainPage(),
-      // home: Demo1(),
+    return TipDialogContainer(
+      child: MaterialApp(
+        showPerformanceOverlay: false,
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          fontFamily: "pixel",
+          brightness: Brightness.dark,
+          primaryColor: AppColors.primaryColor,
+          cardColor: AppColors.topNaviColor,
+          textTheme: TextTheme(
+            body1: TextStyle(decoration: TextDecoration.none)
+          )
+        ),
+        home: SplashPage(),
+        // home: MainPage(),
+        // home: Demo1(),
+      )
     );
   }
 }
