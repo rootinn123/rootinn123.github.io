@@ -291,10 +291,13 @@ class MainPageHeaderWidget extends StatelessWidget{
               onTap: (){
                 NavigatorUtil.pushPage(context, AppRoutes.getInstance().aboutPage);
               },
-              child: CachedNetworkImage(
-                imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_LOGO}',
-                height: 18.0,
-                fit: BoxFit.fitHeight,
+              child: Container(
+                color: Colors.transparent,
+                child: CachedNetworkImage(
+                  imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_LOGO}',
+                  height: 18.0,
+                  fit: BoxFit.fitHeight,
+                ),
               ),
             ),
           ],
