@@ -149,7 +149,8 @@ class _OrderListPageState extends State<OrderListPage>{
                 Container(
                   width: AppDimens.padding_30,
                 ),
-                Text('合计: $amount',style: TextStyle(fontSize: AppDimens.font_18)),
+                Text('合计: ',style: TextStyle(fontSize: AppDimens.font_18,)),
+                Text('$amount',style: TextStyle(fontSize: AppDimens.font_18, color: amount > 0 ?  AppConfig.deskColor[1] : null)),
               ],
             ),
           ),

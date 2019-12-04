@@ -1,13 +1,7 @@
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/data/models.dart';
-import 'package:root_inn/resources/app_colors.dart';
-import 'package:root_inn/resources/app_dimens.dart';
 import 'package:root_inn/ui/main_detail_page.dart';
-import 'package:root_inn/ui/main_page.dart';
 import 'package:root_inn/ui/widgets/widgets.dart';
 
 class MainViewMorePage extends StatelessWidget{

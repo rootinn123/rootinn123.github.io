@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:root_inn/blocs/main_bloc.dart';
+import 'package:root_inn/blocs/bloc_index.dart';
 import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/data/models.dart';
 import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
-import 'package:root_inn/ui/main_page.dart';
 import 'package:root_inn/ui/route/app_routes.dart';
 import 'package:root_inn/utils/navigator_util.dart';
 
@@ -169,6 +168,7 @@ class MainPageHeaderWidget extends StatelessWidget{
   }
 
   Widget _buildHeaderWidget(BuildContext context){
+    final MainBloc bloc = BlocProvider.of<MainBloc>(context);
     LogUtil.v('_buildHeaderWidget----->>>>>>');
     return Positioned(
       top: 0.0,
@@ -230,13 +230,42 @@ class MainPageHeaderWidget extends StatelessWidget{
                             );
 
                           },
-                          child: Container(
-                            margin: EdgeInsets.only(right: 10.0),
-                            padding: EdgeInsets.symmetric(horizontal: 5.0),
-                            width: 40.0,
-                            height: 30.0,
-                            color: Colors.transparent,
-                            child: Image.asset('assets/images/shoppingCar.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
+                          child: StreamBuilder(
+                            stream: bloc.orderListBloc.comListStream,
+                            builder: (BuildContext context, AsyncSnapshot<List<OrderItem>> snapshot){
+                              int count = 0;
+                              if(!ObjectUtil.isEmptyList(snapshot.data)){
+                                for(OrderItem orderItem in snapshot.data){
+                                  count += orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount;
+                                }
+                              }
+                              return Stack(
+                                children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(right: 10.0),
+                                    padding: EdgeInsets.symmetric(horizontal: 5.0),
+                                    width: 40.0,
+                                    height: 30.0,
+                                    color: Colors.transparent,
+                                    child: Image.asset('assets/images/shoppingCar.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
+                                  ),
+                                  Positioned(
+                                    top: 0.0,
+                                    right: 8.0,
+                                    child: count > 0?  Container(
+                                      alignment: Alignment.center,
+                                      height: 14.0,
+                                      width: 14.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppConfig.deskColor[1]
+                                      ),
+                                      // child: Text('6', style: TextStyle(fontSize: AppDimens.font_14, color: Colors.white),),
+                                    ) : Container(),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
                         ),
                         GestureDetector(
@@ -258,10 +287,15 @@ class MainPageHeaderWidget extends StatelessWidget{
                 ],
               ),
             ),
-            CachedNetworkImage(
-              imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_LOGO}',
-              height: 18.0,
-              fit: BoxFit.fitHeight,
+            GestureDetector(
+              onTap: (){
+                NavigatorUtil.pushPage(context, AppRoutes.getInstance().aboutPage);
+              },
+              child: CachedNetworkImage(
+                imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_LOGO}',
+                height: 18.0,
+                fit: BoxFit.fitHeight,
+              ),
             ),
           ],
         )

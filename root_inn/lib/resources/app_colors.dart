@@ -29,7 +29,7 @@ class AppColors {
 
   static const Color primaryFontColor = Color(0xFFFFFFFF);
   static const Color selectedFontColor = Color(0xFF00FDFF);
-  static const Color priceFontColor = Color(0xFF00FDFF);
+  static const Color priceFontColor = Color.fromRGBO(0, 252, 255, 1.0);
   static const Color descriptionFontColor = Color(0xFFA4A4A4);
 
   static const Color markFontColor = Color(0xFF89371A);

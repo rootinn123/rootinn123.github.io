@@ -160,9 +160,10 @@ class BlockHiddenImageWidget extends StatelessWidget{
             alignment: Alignment.bottomCenter,
             child: Text('$topWord', style: TextStyle(fontSize: AppDimens.font_18),),
           ),
+          Container(height: 4.0,),
           Container(
             alignment: Alignment.bottomCenter,
-            child: Text('$bottomWord', style: TextStyle(fontSize: AppDimens.font_16, color: AppColors.descriptionFontColor),),
+            child: Text('$bottomWord', style: TextStyle(fontSize: AppDimens.font_12, color: AppColors.descriptionFontColor),),
           )
         ],
       ),

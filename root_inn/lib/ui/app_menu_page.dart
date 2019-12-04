@@ -41,11 +41,14 @@ class AppMenuPage extends StatelessWidget{
             child: Container(
               // height: AppConfig.appScreenHeight,
               width: AppConfig.appScreenWidth,
+              constraints: BoxConstraints(
+                minHeight: AppConfig.appScreenHeight,
+              ),
               padding: EdgeInsets.only(top: 170.0),
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/timeSlot.png'),
-                  fit: BoxFit.cover
+                  fit: BoxFit.fill
                 )
               ),
               child: Column(

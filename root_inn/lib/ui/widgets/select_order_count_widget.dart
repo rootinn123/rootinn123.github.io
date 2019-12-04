@@ -130,7 +130,7 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
                 '${widget.product.unitPrice[widget.unitPriceIndex].checkCount}', 
                 style: TextStyle(
                   color: widget.product.unitPrice[widget.unitPriceIndex].checkCount > 0 ? AppColors.countColor : AppColors.descriptionFontColor, 
-                  fontSize: AppDimens.font_26
+                  fontSize: AppDimens.font_20
                 ),
               ),
             ),
@@ -192,7 +192,7 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
                 '${widget.product.unitPrice[widget.unitPriceIndex].checkCount}', 
                 style: TextStyle(
                   color: widget.product.unitPrice[widget.unitPriceIndex].checkCount > 0 ? AppColors.countColor : AppColors.descriptionFontColor, 
-                  fontSize: AppDimens.font_26,
+                  fontSize: AppDimens.font_20,
                   fontStyle: FontStyle.normal,
                   fontFamily: 'pixel',
                   decoration: TextDecoration.none,
