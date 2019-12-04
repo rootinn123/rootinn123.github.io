@@ -41,7 +41,7 @@ class SplashPage extends StatelessWidget {
       body: Center(
         child: CachedNetworkImage(
           imageUrl: '${Constant.DUMEI_RESOURCE_SERVER}${Constant.IMAGE_LOGO}',
-          height: 150.0,
+          width: 300.0,
           fit: BoxFit.fitWidth,
         ),
       ),

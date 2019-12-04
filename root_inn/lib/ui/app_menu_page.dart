@@ -41,7 +41,13 @@ class AppMenuPage extends StatelessWidget{
             child: Container(
               // height: AppConfig.appScreenHeight,
               width: AppConfig.appScreenWidth,
-              padding: EdgeInsets.only(top: 200.0),
+              padding: EdgeInsets.only(top: 170.0),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/timeSlot.png'),
+                  fit: BoxFit.cover
+                )
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: this._buildContentWidget(context, bloc, snapshot.data),
@@ -87,20 +93,24 @@ class AppMenuPage extends StatelessWidget{
       },
       child: Container(
         alignment: Alignment.center,
-        height: 100.0,
-        width: 400.0,
+        height: 120.0,
+        width: 500.0,
         margin: EdgeInsets.only(bottom: 15.0),
         decoration: BoxDecoration(
-          border: Border.all(width: 1.0, color: AppConfig.deskColor[1]),
+          // border: Border.all(width: 1.0, color: AppConfig.deskColor[1]),
           borderRadius: BorderRadius.all(Radius.circular(2.0)),
+          image: DecorationImage(
+            image: AssetImage('assets/images/timeSlotBg.png'),
+            fit: BoxFit.fill
+          )
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('${appMenuType.name}', style: TextStyle(fontSize: AppDimens.font_26),),
+            Text('${appMenuType.name}', style: TextStyle(fontSize: AppDimens.font_28),),
             Container(height: 3.0,),
-            Text('${appMenuType.aliasName}/${appMenuType.timeSlot}', style: TextStyle(fontSize: AppDimens.font_18),),
+            Text('${appMenuType.aliasName}/${appMenuType.timeSlot}', style: TextStyle(fontSize: AppDimens.font_14),),
           ],
         ),
       ),
@@ -110,7 +120,7 @@ class AppMenuPage extends StatelessWidget{
   Widget _buildHeaderWidget(){
     return Padding(
       padding: EdgeInsets.only(bottom: 35.0),
-      child: Image.asset('assets/images/logo.png', height: 64, fit: BoxFit.fitHeight,),
+      child: Image.asset('assets/images/logo-1.png', width: 500, fit: BoxFit.fitWidth,),
     );
   }
 

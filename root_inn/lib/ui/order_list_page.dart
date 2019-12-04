@@ -469,7 +469,7 @@ class _DeskExpensionPanelWidgetState extends State<DeskExpensionPanelWidget>{
   Widget _buildWrapDeskWidget(BuildContext context, MainBloc bloc, List<Desk> deskList, int currentIndex){
     
         
-        LogUtil.e('_buildWrapDeskWidget---snapshot--->${deskList?.length}');
+        LogUtil.v('_buildWrapDeskWidget---snapshot--->${deskList?.length}');
         List<Widget> listWidget = <Widget>[];
         for(int i=0; i< deskList.length; i++){
           listWidget.add(this._buildDeskWidget(context, bloc, deskList[i], i ,currentIndex == i));
