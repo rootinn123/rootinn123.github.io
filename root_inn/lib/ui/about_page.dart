@@ -32,11 +32,12 @@ class AboutPage extends StatelessWidget{
     Widget _buildPageWidget(BuildContext context){
     return Positioned(
       top:AppConfig.appHeaderHeight,
-      left: 10.0,
-      right: 10.0,
+      left: 30.0,
+      right: 30.0,
       bottom: 0.0,
       child: SingleChildScrollView(
         child: Container(
+          padding: EdgeInsets.only(top: 25.0, bottom: 30.0),
           child: Column(
             children: <Widget>[
               CachedNetworkImage(
@@ -64,6 +65,7 @@ class AboutPage extends StatelessWidget{
         )
       ),
     );
+  }
 }
 
 // class AboutPage extends StatefulWidget{
