@@ -32,8 +32,8 @@ class AboutPage extends StatelessWidget{
     Widget _buildPageWidget(BuildContext context){
     return Positioned(
       top:AppConfig.appHeaderHeight,
-      left: 30.0,
-      right: 30.0,
+      left: 168.0,
+      right: 168.0,
       bottom: 0.0,
       child: SingleChildScrollView(
         child: Container(
