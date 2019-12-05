@@ -421,15 +421,19 @@ class ProductCard extends StatelessWidget{
   Widget _buildDetailCenterDescWidget(BuildContext context){
    
     return Container(
+      padding: EdgeInsets.only(top: AppDimens.padding_6, bottom: AppDimens.padding_2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
 
           Expanded(
             child: Row(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 ObjectUtil.isEmptyList(this.product.mark) ?  Container(): Container(
-                  padding: EdgeInsets.only(top: AppDimens.padding_6, bottom: AppDimens.padding_2),
+                  // padding: EdgeInsets.only(top: AppDimens.padding_6, bottom: AppDimens.padding_2),
                   constraints: BoxConstraints(
                     maxWidth: 100.0,
                     minWidth: 40,

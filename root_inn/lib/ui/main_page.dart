@@ -178,14 +178,17 @@ class _MainPageState extends State<MainPage>{
 
   Widget _buildBottomNaviItemWidget(MainBloc bloc, Menu menu, int index, bool active){
     
+    LogUtil.e('imageUrl-index---->>>>$index');
     String imageUrl = menu.image;
     if(active){
       List<String> list = imageUrl.split('.');
       imageUrl = '${list[0]}_active.${list[1]}';
+      LogUtil.e('imageUrl----->>>>$imageUrl');
     }
     return Expanded(
       child: GestureDetector(
         onTap: (){
+          LogUtil.e('imageUrl-index--onTap-->>>>$index');
           bloc.mainBottomNaviIndexBloc.comData.sink.add(index);
         },
         child: Container(
