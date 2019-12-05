@@ -73,8 +73,9 @@ class ViewMoreBottonWidget extends StatelessWidget{
 
 class MarkWidget extends StatelessWidget{
 
-  MarkWidget({Key key, this.mark}) : super(key: key);
+  MarkWidget({Key key, this.mark, this.color}) : super(key: key);
   final String mark;
+  final Color color;
 
   @override
   Widget build(BuildContext context){
@@ -82,7 +83,8 @@ class MarkWidget extends StatelessWidget{
       // width: 10,
       // alignment: Alignment.center,
       margin: EdgeInsets.only(right: 4.0),
-      padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+      height: 20.0,
+      padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 3.5),
       decoration: BoxDecoration(
         // color: Colors.red,
         borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius_10)),
@@ -92,10 +94,11 @@ class MarkWidget extends StatelessWidget{
         '${this.mark}', 
         style: TextStyle(
           fontSize: AppDimens.font_12, 
-          color: AppColors.markFontColor,
+          color: color,
           fontFamily: 'pixel',
           decoration: TextDecoration.none,
         ), 
+        textAlign: TextAlign.center,
         maxLines: 1, 
         overflow: TextOverflow.ellipsis,
       ),

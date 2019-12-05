@@ -200,7 +200,7 @@ class ProductCard extends StatelessWidget{
     // double cardWidth = this.type == 1 ? this.width : this.width - 2*AppDimens.padding_80;
     // LogUtil.v('------>>>>>>>>${cardHeight * ratio}-----${cardHeight * (1 - ratio)}');
     return Container(
-        margin: this.type == 1 ? EdgeInsets.only(right: AppDimens.padding_10) : EdgeInsets.only(left: AppDimens.padding_80, top: AppDimens.padding_80, right:  AppDimens.padding_80) ,
+        margin: this.type == 1 ? EdgeInsets.only(right: AppDimens.padding_10) : EdgeInsets.only(left: AppDimens.padding_80, top: AppDimens.padding_80, right:  AppDimens.padding_80, bottom: AppDimens.padding_80) ,
         // padding: this.type == 2 ? : null,
         decoration: BoxDecoration(
           color: Colors.transparent,
@@ -277,7 +277,7 @@ class ProductCard extends StatelessWidget{
       padding: this.type == 1 ?  
         EdgeInsets.only(top: AppDimens.padding_20, left: AppDimens.padding_20, right: AppDimens.padding_20)
       :
-        EdgeInsets.only(top: AppDimens.padding_45, left: AppDimens.padding_40, right: AppDimens.padding_40)
+        EdgeInsets.only(top: AppDimens.padding_36, left: AppDimens.padding_40, right: AppDimens.padding_40)
       ,
       decoration: BoxDecoration(
         color: AppColors.topNaviColor,
@@ -302,20 +302,22 @@ class ProductCard extends StatelessWidget{
                   fontStyle: FontStyle.normal,
                   fontFamily: 'pixel',
                   decoration: TextDecoration.none,
-                  fontSize: this.type ==1 ? AppDimens.font_16 : AppDimens.font_24,
-                  color: Colors.white,
+                  fontSize: this.type ==1 ? AppDimens.font_16 : AppDimens.font_16,
+                  color: Colors.white
                 ), overflow: TextOverflow.ellipsis, maxLines: 1,),
               ),
               this._buildDetailBottomTopPriceWidget(),
+              this.type == 1 ? Container() : SelectOrderCountWidget(type: 2,product: this.product, width: null, height: 20.0, unitPriceIndex: 0,),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.only(top: AppDimens.padding_4),
-          ),
+
+          // Padding(
+          //   padding: EdgeInsets.only(top: AppDimens.padding_4),
+          // ),
           
           Container(
             alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(right: 4.0),
+            padding: EdgeInsets.only(top: this.type ==1 ? AppDimens.padding_4 : AppDimens.padding_4,right: 4.0),
             child: Text(
               '${this.product.aliasName}', 
               style: TextStyle(
@@ -329,19 +331,37 @@ class ProductCard extends StatelessWidget{
             ),
           ),
               
-          Padding(
-            padding: EdgeInsets.only(top: AppDimens.padding_4),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.only(),
+          // ),
           
           this._buildDetailCenterDescWidget(context),
-          Padding(
-            padding: EdgeInsets.only(top: AppDimens.padding_4),
-          ),
           
+          // Padding(
+          //   padding: EdgeInsets.only(top: AppDimens.padding_6),
+          // ),
+          ObjectUtil.isNotEmpty(this.product.enDescription) && this.type == 2 ? 
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(top:AppDimens.padding_6, bottom: AppDimens.padding_2),
+              child: Text(
+                '${this.product.enDescription}', 
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: AppDimens.font_16, 
+                  color: AppColors.descriptionFontColor,
+                  fontFamily: 'pixel',
+                  decoration: TextDecoration.none,
+                )
+              ),
+            )
+          : 
+            Container(),
+
           ObjectUtil.isNotEmpty(this.product.description) && this.type == 2 ? 
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.symmetric(vertical: AppDimens.padding_2),
+              padding: EdgeInsets.only(top:AppDimens.padding_6, bottom: AppDimens.padding_2),
               child: Text(
                 '${this.product.description}', 
                 textAlign: TextAlign.start,
@@ -370,7 +390,8 @@ class ProductCard extends StatelessWidget{
       priceInfo = '${this.product.price}${this.product.currency}';
     }else{
       priceInfo = this.product.unitPrice.map((SpecsProduct  specsProduct){
-        return '${specsProduct.price}${specsProduct.unit}';
+        return '${specsProduct.price}';
+        // return '${specsProduct.price}${specsProduct.unit}';
       }).join(' ');
     }
     return Expanded(
@@ -385,8 +406,8 @@ class ProductCard extends StatelessWidget{
                 fontStyle: FontStyle.normal,
                 fontFamily: 'pixel',
                 decoration: TextDecoration.none,
-                fontSize: AppDimens.font_24,
-                color: Colors.white,
+                fontSize: AppDimens.font_18,
+                color: AppColors.priceFontColor,
               ), 
             overflow: TextOverflow.ellipsis, 
             maxLines: 1,
@@ -400,47 +421,76 @@ class ProductCard extends StatelessWidget{
   Widget _buildDetailCenterDescWidget(BuildContext context){
    
     return Container(
-      padding: EdgeInsets.symmetric(vertical: AppDimens.padding_2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-         
-            
-          ObjectUtil.isEmptyList(this.product.mark) ?  Container(): ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: 90.0,
-              minWidth: 40,
+
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                ObjectUtil.isEmptyList(this.product.mark) ?  Container(): Container(
+                  padding: EdgeInsets.only(top: AppDimens.padding_6, bottom: AppDimens.padding_2),
+                  constraints: BoxConstraints(
+                    maxWidth: 100.0,
+                    minWidth: 40,
+                  ),
+                  child: MarkWidget(mark: this.product.mark[0], color: AppConfig.markColor[1],),
+                ),
+
+                this.product.mark.length > 1 ? 
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: 100.0,
+                      minWidth: 40,
+                    ),
+                    child: MarkWidget(mark: this.product.mark[1], color: AppConfig.markColor[2],),
+                  ) 
+                : 
+                  Container(),
+                this.type == 2 &&  this.product.mark.length > 2 ? 
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: 100.0,
+                      minWidth: 40,
+                    ),
+                    child: MarkWidget(mark: this.product.mark[2], color: AppConfig.markColor[2],),
+                  ) 
+                : 
+                  Container(),
+                this.type == 3 &&  this.product.mark.length > 3 ? 
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: 100.0,
+                      minWidth: 40,
+                    ),
+                    child: MarkWidget(mark: this.product.mark[3], color: AppConfig.markColor[3],),
+                  ) 
+                : 
+                  Container(),
+              ],
             ),
-            child: MarkWidget(mark: this.product.mark[0],),
           ),
-          this.type == 2 &&  this.product.mark.length > 1 ? 
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: 90.0,
-                minWidth: 40,
-              ),
-              child: MarkWidget(mark: this.product.mark[1],),
-            ) 
-          : 
-            Container(),
-          this.type == 1 ? Expanded(
-            flex: 1,
+            
+          
+          this.type == 1 ? Padding(
+            padding: EdgeInsets.only(left: 5.0),
             child: Text(
-              '${this.product.price}${this.product.currency}', 
+              // '${this.product.price}${this.product.currency}', 
+              '${this.product.price}', 
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontStyle: FontStyle.normal,
                   fontFamily: 'pixel',
                   decoration: TextDecoration.none,
                   fontSize: AppDimens.font_18,
-                  color: Colors.white,
+                  color: AppColors.priceFontColor,
                 ), 
                 overflow: TextOverflow.ellipsis, 
                 maxLines: 1,
                 textAlign: TextAlign.right,
               ),
           ):           
-          SelectOrderCountWidget(type: 2,product: this.product, width: 100.0, height: 40.0, unitPriceIndex: 0,),
+          Container()
         ],
       ),
     );

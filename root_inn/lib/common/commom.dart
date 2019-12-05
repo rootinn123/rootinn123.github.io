@@ -67,6 +67,15 @@ class AppConfig {
 
   static const String splitSymbol = '+';
 
+  static Map<int, Color> markColor = {
+    1: Color.fromRGBO(17, 234, 79, 1.0),
+    2: Color.fromRGBO(255, 175, 0, 1.0),
+    3: Color.fromRGBO(228, 94, 239, 1.0),
+    4: Color.fromRGBO(78, 183, 255, 1.0),
+    5: Color.fromRGBO(198, 0, 255, 1.0),
+    6: Color.fromRGBO(164, 164, 164, 1.0),
+  };
+
   static Map<int, Color> deskColor = {
     1: Color.fromRGBO(255, 0, 103, 1.0),
     2: Color.fromRGBO(0, 129, 255, 1.0),

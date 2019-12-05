@@ -97,6 +97,7 @@ class Product {
   String type;
   String image;
   List<String> mark;                      // 加号分割
+  String enDescription;                   // 英文描述
   String description;
   int spiceIndex;
   int alcoholIndex;
@@ -116,6 +117,7 @@ class Product {
     this.type,
     this.image,
     this.mark,                      // 加号分割
+    this.enDescription,
     this.description,
     this.spiceIndex,
     this.alcoholIndex,
@@ -155,6 +157,7 @@ class Product {
       type = jsonData['type'],
       image = Utils.trimData(jsonData['image']),
       mark = Product.resolveMark(jsonData['mark']),
+      enDescription = jsonData['enDescription'],
       description = jsonData['description'],
       spiceIndex =  Utils.tranfer2Int(jsonData['spiceIndex']),
       alcoholIndex = Utils.tranfer2Int(jsonData['alcoholIndex']),

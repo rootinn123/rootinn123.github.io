@@ -130,7 +130,7 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
                 '${widget.product.unitPrice[widget.unitPriceIndex].checkCount}', 
                 style: TextStyle(
                   color: widget.product.unitPrice[widget.unitPriceIndex].checkCount > 0 ? AppColors.countColor : AppColors.descriptionFontColor, 
-                  fontSize: AppDimens.font_20
+                  fontSize: AppDimens.font_18
                 ),
               ),
             ),
@@ -160,50 +160,50 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
     return Container(
       width: widget.width,
       height: widget.height,
-      margin: EdgeInsets.only(left: 5.0),
+      margin: EdgeInsets.only(left: 15.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          GestureDetector(
-            onTap: () => this._subtractCount(bloc),
-            child: Container(
-              height: 30.0,
-              width: 30.0,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-              ),
-              child: Image.asset(
-                'assets/images/subSign.png',
-                  fit: BoxFit.fill,
-                  height: 20.0,
-                  width: 20.0,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: AppColors.cardBottomColor,
-              ),
-              child: Text(
-                '${widget.product.unitPrice[widget.unitPriceIndex].checkCount}', 
-                style: TextStyle(
-                  color: widget.product.unitPrice[widget.unitPriceIndex].checkCount > 0 ? AppColors.countColor : AppColors.descriptionFontColor, 
-                  fontSize: AppDimens.font_20,
-                  fontStyle: FontStyle.normal,
-                  fontFamily: 'pixel',
-                  decoration: TextDecoration.none,
-                ),),
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: () => this._subtractCount(bloc),
+          //   child: Container(
+          //     height: 20.0,
+          //     width: 20.0,
+          //     alignment: Alignment.center,
+          //     decoration: BoxDecoration(
+          //       color: Colors.transparent,
+          //     ),
+          //     child: Image.asset(
+          //       'assets/images/subSign.png',
+          //         fit: BoxFit.fill,
+          //         height: 20.0,
+          //         width: 20.0,
+          //     ),
+          //   ),
+          // ),
+          // Expanded(
+          //   flex: 3,
+          //   child: Container(
+          //     alignment: Alignment.center,
+          //     decoration: BoxDecoration(
+          //       color: AppColors.cardBottomColor,
+          //     ),
+          //     child: Text(
+          //       '${widget.product.unitPrice[widget.unitPriceIndex].checkCount}', 
+          //       style: TextStyle(
+          //         color: widget.product.unitPrice[widget.unitPriceIndex].checkCount > 0 ? AppColors.countColor : AppColors.descriptionFontColor, 
+          //         fontSize: AppDimens.font_20,
+          //         fontStyle: FontStyle.normal,
+          //         fontFamily: 'pixel',
+          //         decoration: TextDecoration.none,
+          //       ),),
+          //   ),
+          // ),
           GestureDetector(
             onTap: ()=> this._addCount(bloc),
             child: Container(
-              height: 30.0,
-              width: 30.0,
+              height: 20.0,
+              width: 20.0,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.transparent,
