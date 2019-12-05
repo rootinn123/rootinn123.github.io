@@ -421,7 +421,7 @@ class ProductCard extends StatelessWidget{
   Widget _buildDetailCenterDescWidget(BuildContext context){
    
     return Container(
-      padding: EdgeInsets.only(top: AppDimens.padding_6, bottom: AppDimens.padding_2),
+      padding: EdgeInsets.only(top: ObjectUtil.isEmptyList(this.product.mark) ? 0 : AppDimens.padding_6, bottom: AppDimens.padding_2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
