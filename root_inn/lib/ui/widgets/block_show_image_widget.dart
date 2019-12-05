@@ -17,8 +17,9 @@ import 'package:root_inn/ui/widgets/widgets.dart';
 // import 'package:root_inn/utils/navigator_util.dart';
 
 class BlockShowImageWidget extends StatelessWidget{
-  BlockShowImageWidget({Key key, this.menu}) : super(key: key);
+  BlockShowImageWidget({Key key, this.menu, this.type = 1}) : super(key: key);
   final Menu menu;
+  final int type;
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +67,10 @@ class BlockShowImageWidget extends StatelessWidget{
 
 class PlaceOrderPrudct extends StatelessWidget{
 
-  PlaceOrderPrudct({Key key, this.product}): super(key: key);
+  PlaceOrderPrudct({Key key, this.product, this.type = 1}): super(key: key);
 
   final Product product;
+  final int type;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +81,7 @@ class PlaceOrderPrudct extends StatelessWidget{
         this._buildCardHeaderWidget(context),
         Container(height: 1.0,),
         SelectOrderCountWidget(
+          type: this.type,
           product: this.product,
           width: AppDimens.card_width,
           height: 42.0,
@@ -251,7 +254,7 @@ class ProductCard extends StatelessWidget{
           Container(
             alignment: Alignment.center,
             color: AppColors.topNaviColor,
-            child: Text('暂未上图', style: TextStyle(fontSize: AppDimens.font_36, color: AppColors.selectedFontColor),),
+            child: Text('暂未上图', style: TextStyle(fontSize: AppDimens.font_22, color: AppColors.selectedFontColor),),
           ),
       ),
     );
@@ -307,7 +310,7 @@ class ProductCard extends StatelessWidget{
                 ), overflow: TextOverflow.ellipsis, maxLines: 1,),
               ),
               this._buildDetailBottomTopPriceWidget(),
-              this.type == 1 ? Container() : SelectOrderCountWidget(type: 2,product: this.product, width: null, height: 20.0, unitPriceIndex: 0,),
+              this.type == 1 ? Container() : SelectOrderCountWidget(type: this.type, product: this.product, width: null, height: 20.0, unitPriceIndex: 0,),
             ],
           ),
 
@@ -343,7 +346,7 @@ class ProductCard extends StatelessWidget{
           ObjectUtil.isNotEmpty(this.product.enDescription) && this.type == 2 ? 
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(top:AppDimens.padding_6, bottom: AppDimens.padding_2),
+              padding: EdgeInsets.only(top:AppDimens.padding_3, bottom: AppDimens.padding_2),
               child: Text(
                 '${this.product.enDescription}', 
                 textAlign: TextAlign.start,
@@ -421,7 +424,7 @@ class ProductCard extends StatelessWidget{
   Widget _buildDetailCenterDescWidget(BuildContext context){
    
     return Container(
-      padding: EdgeInsets.only(top: ObjectUtil.isEmptyList(this.product.mark) ? 0 : AppDimens.padding_6, bottom: AppDimens.padding_2),
+      padding: EdgeInsets.only(top: ObjectUtil.isEmptyList(this.product.mark) ? AppDimens.padding_4 : AppDimens.padding_6, bottom: AppDimens.padding_2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,

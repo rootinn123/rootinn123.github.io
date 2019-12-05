@@ -5,11 +5,12 @@ import 'package:root_inn/blocs/bloc_index.dart';
 import 'package:root_inn/data/models.dart';
 import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
+import 'package:tip_dialog/tip_dialog.dart';
 
 class SelectOrderCountWidget extends StatefulWidget{
 
   SelectOrderCountWidget({Key key,
-    this.type = 1, 
+    this.type = 1,  //1主页 2弹窗 3需要setState
     @required this.product, 
     @required this.width, 
     @required this.height, 
@@ -43,7 +44,7 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
 
   @override
   Widget build(BuildContext context) {
-    return widget.type == 1  ? this._buildCardBottomWidget(context) : this._buildDetailBottomWidget(context);
+    return widget.type == 1 || widget.type == 3 ? this._buildCardBottomWidget(context) : this._buildDetailBottomWidget(context);
   }
 
   void _subtractCount(MainBloc bloc){
@@ -60,7 +61,7 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
     }
     bloc.orderListBloc.comListData.sink.add(orderList);
     bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
-    if(widget.type != 1) setState(() {});
+    if(widget.type == 3) setState(() {});
   }
 
   void _addCount(MainBloc bloc){
@@ -90,7 +91,14 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
     bloc.orderListBloc.comList = orderList;
     bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList );
     bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
-    if(widget.type != 1) setState(() {});
+    if(widget.type == 2) {
+      // setState(() {});
+      TipDialogHelper.success(context, "Successfully");
+      Future.delayed(Duration(milliseconds: 1000)).then((_){
+        TipDialogHelper.dismiss(context);
+      });
+    }
+    if(widget.type == 3) setState(() {});
   }
 
 
@@ -160,7 +168,7 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
     return Container(
       width: widget.width,
       height: widget.height,
-      margin: EdgeInsets.only(left: 15.0),
+      // margin: EdgeInsets.only(left: 15.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -203,7 +211,8 @@ class _SelectOrderCountWidgetState extends State<SelectOrderCountWidget>{
             onTap: ()=> this._addCount(bloc),
             child: Container(
               height: 20.0,
-              width: 20.0,
+              width: 35.0,
+              padding: EdgeInsets.only(left: 15.0),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.transparent,

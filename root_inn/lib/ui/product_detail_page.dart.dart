@@ -16,7 +16,7 @@ class ProductDetailPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    Widget productCard = ProductCard(product: product,type: 2, ratio: 0.8,);
+    Widget productCard = ProductCard(product: product, type: 2, ratio: 0.8,);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: this.isHero ? 

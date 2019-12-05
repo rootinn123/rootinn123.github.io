@@ -6,8 +6,10 @@ import 'package:root_inn/ui/widgets/block_show_image_widget.dart';
 
 class MainDetailPage extends StatelessWidget{
 
-  MainDetailPage({Key key, this.menu}) : super(key: key);
+  MainDetailPage({Key key, this.menu, this.type = 1}) : super(key: key);
   final Menu menu;
+  final int  type;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class MainDetailPage extends StatelessWidget{
   /// 页面板块
   List<Widget> _buildBlockListWidget(BuildContext context){
     List<Widget> list = this.menu.subMenu.map((Menu menu){
-      return menu.subclassImageShow ? BlockShowImageWidget(menu: menu) : BlockHiddenImageWidget(menu: menu);
+      return menu.subclassImageShow ? BlockShowImageWidget(menu: menu, type: this.type,) : BlockHiddenImageWidget(menu: menu, type: this.type,);
     }).toList();
     return list;
   }

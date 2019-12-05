@@ -88,7 +88,7 @@ class MarkWidget extends StatelessWidget{
       decoration: BoxDecoration(
         // color: Colors.red,
         borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius_10)),
-        border: Border.all(color: AppColors.markFontColor, width: 0.5),
+        border: Border.all(color: color, width: 1),
       ),
       child: Text(
         '${this.mark}', 
@@ -257,8 +257,8 @@ class MainPageHeaderWidget extends StatelessWidget{
                                     right: 8.0,
                                     child: count > 0?  Container(
                                       alignment: Alignment.center,
-                                      height: 14.0,
-                                      width: 14.0,
+                                      height: 12.0,
+                                      width: 12.0,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: AppConfig.deskColor[1]

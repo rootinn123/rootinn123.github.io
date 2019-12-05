@@ -246,7 +246,7 @@ class _OrderListPageState extends State<OrderListPage>{
 
           Container(
             margin: EdgeInsets.only(left: 15.0),
-            width: 80.0,
+            width: 100.0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -254,12 +254,15 @@ class _OrderListPageState extends State<OrderListPage>{
                   onTap: (){
                     if(orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount <= 0) return;
                     orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount--;
+                    if(orderItem.product.unitPrice[orderItem.unitPriceItemIndex].checkCount == 0){
+                      bloc.orderListBloc.comList.remove(orderItem);
+                    }
                     bloc.orderListBloc.comListData.sink.add(bloc.orderListBloc.comList);
                     bloc.menulListBloc.comListData.sink.add(bloc.menulListBloc.comList);
                   },
                   child: Container(
-                    height: 20.0,
-                    width: 20.0,
+                    height: 30.0,
+                    width: 30.0,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: AppColors.cardBottomColor,

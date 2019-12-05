@@ -5,14 +5,13 @@ import 'package:root_inn/common/commom.dart';
 import 'package:root_inn/data/models.dart';
 import 'package:root_inn/resources/app_colors.dart';
 import 'package:root_inn/resources/app_dimens.dart';
-import 'package:root_inn/ui/route/app_routes.dart';
 import 'package:root_inn/ui/widgets/select_order_count_widget.dart';
 import 'package:root_inn/ui/widgets/widgets.dart';
-import 'package:root_inn/utils/navigator_util.dart';
 
 class BlockHiddenImageWidget extends StatelessWidget{
-  BlockHiddenImageWidget({Key key, this.menu}) : super(key: key);
+  BlockHiddenImageWidget({Key key, this.menu, this.type = 1}) : super(key: key);
   final Menu menu;
+  final int type;
 
   @override
   Widget build(BuildContext context) {
@@ -132,14 +131,14 @@ class BlockHiddenImageWidget extends StatelessWidget{
             color: Colors.black,
             child: product.unitPrice.length  == 1 ?  Column(
                 children: <Widget>[
-                  SelectOrderCountWidget(product: product, width: 180.0, height: 80.0,unitPriceIndex: 0,),
+                  SelectOrderCountWidget(type: this.type, product: product, width: 180.0, height: 80.0,unitPriceIndex: 0,),
                 ],
               ): 
               product.unitPrice.length  == 2 ?  Column(
                 children: <Widget>[
-                  SelectOrderCountWidget(product: product, width: 180.0, height: 39.5,unitPriceIndex: 0,),
+                  SelectOrderCountWidget(type: this.type, product: product, width: 180.0, height: 39.5,unitPriceIndex: 0,),
                   Container(height: 1.0,width: 180.0, color: Colors.black,),
-                  SelectOrderCountWidget(product: product, width: 180.0, height: 39.5,unitPriceIndex: 1,),
+                  SelectOrderCountWidget(type: this.type, product: product, width: 180.0, height: 39.5,unitPriceIndex: 1,),
                 ],
               ): Container(),
             

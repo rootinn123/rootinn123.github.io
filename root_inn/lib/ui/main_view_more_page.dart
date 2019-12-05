@@ -4,10 +4,13 @@ import 'package:root_inn/data/models.dart';
 import 'package:root_inn/ui/main_detail_page.dart';
 import 'package:root_inn/ui/widgets/widgets.dart';
 
-class MainViewMorePage extends StatelessWidget{
+class MainViewMorePage extends StatefulWidget{
   MainViewMorePage({Key key, this.menu}) : super(key: key);
   final Menu menu;
-
+  @override
+  State<StatefulWidget> createState() => _MainViewMorePageState();
+}
+class _MainViewMorePageState extends State<MainViewMorePage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +22,7 @@ class MainViewMorePage extends StatelessWidget{
             top: 0.0,
             left: 0.0,
             right: 0.0,
-            child:Appheader(title: this.menu.moreTitle,),
+            child:Appheader(title: widget.menu.moreTitle,),
           ),
         ],
       ),
@@ -28,7 +31,7 @@ class MainViewMorePage extends StatelessWidget{
   
   Widget _buildPageWidget(BuildContext context){
     return Positioned.fill(
-      child: MainDetailPage(menu: this.menu,),
+      child: MainDetailPage(menu: widget.menu, type: 3,),
     );
   }
 
