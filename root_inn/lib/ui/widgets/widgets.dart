@@ -271,18 +271,18 @@ class MainPageHeaderWidget extends StatelessWidget{
                             },
                           ),
                         ),
-                        GestureDetector(
-                          onTap: (){
-                            NavigatorUtil.pushPage(context, AppRoutes.getInstance().lotteryViewPage);
-                          },
-                          child: Container(
-                            width: 40.0,
-                            height: 30.0,
-                            padding: EdgeInsets.symmetric(horizontal: 5.0),
-                            color: Colors.transparent,
-                            child: Image.asset('assets/images/prize.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
-                          ),
-                        )
+                        // GestureDetector(
+                        //   onTap: (){
+                        //     NavigatorUtil.pushPage(context, AppRoutes.getInstance().lotteryViewPage);
+                        //   },
+                        //   child: Container(
+                        //     width: 40.0,
+                        //     height: 30.0,
+                        //     padding: EdgeInsets.symmetric(horizontal: 5.0),
+                        //     color: Colors.transparent,
+                        //     child: Image.asset('assets/images/prize.png', width: 30.0, height: 30.0, fit: BoxFit.fill,),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

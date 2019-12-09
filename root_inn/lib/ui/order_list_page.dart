@@ -94,12 +94,12 @@ class _OrderListPageState extends State<OrderListPage>{
                 padding: EdgeInsets.only(left: AppDimens.padding_36, right: AppDimens.padding_36, top: AppConfig.appBarHeight * AppConfig.appScreenHeight + 20, bottom: 90.0),
                 child: Column(
                   children: <Widget>[
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(top: AppDimens.padding_30,bottom: AppDimens.padding_15),
-                      child: Text('当前台号', style: TextStyle(color: Colors.white, fontSize: AppDimens.font_24), textAlign: TextAlign.start,),
-                    ),
-                    DeskExpensionPanelWidget(),
+                    // Container(
+                    //   alignment: Alignment.centerLeft,
+                    //   padding: EdgeInsets.only(top: AppDimens.padding_30,bottom: AppDimens.padding_15),
+                    //   child: Text('当前台号', style: TextStyle(color: Colors.white, fontSize: AppDimens.font_24), textAlign: TextAlign.start,),
+                    // ),
+                    // DeskExpensionPanelWidget(),
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: EdgeInsets.only(top: AppDimens.padding_30,bottom: AppDimens.padding_15),
@@ -333,7 +333,7 @@ class _OrderListPageState extends State<OrderListPage>{
               // border: Border(bottom: BorderSide(width: 1.0, color: AppColors.primaryColor))
             ),
             padding: EdgeInsets.only(top: 20.0,bottom: 10.0),
-            child: Text('确认该订单？', style: TextStyle(fontSize: AppDimens.font_24),),
+            child: Text('确认清除购物车内容？', style: TextStyle(fontSize: AppDimens.font_24),),
           ),
           Row(
             children: <Widget>[
