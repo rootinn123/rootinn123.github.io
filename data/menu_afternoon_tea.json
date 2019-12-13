@@ -11,7 +11,7 @@
         {"id":"31","level":"2","name":"法式甜点","title":"French dessert","image":"","subclassImageShow":"FALSE","hasMore":"FALSE","moreTitle":"","remark":""}
         
         ],
-    "products": [
+    "products":[
         {"id":"1","name":"Strawberry Mojito","aliasName":"草莓莫吉托","category":"11","currency":"RMB","price":"48","unitPrice":"48/Glass","newStatus":"FALSE","recommendStatus":"FALSE","type":"alcoholic drink","image":"images/product/cocktail/Strawberry_mojito.png","mark":"Sweet+Sour","enDescription":"Bacardi Rum/Lime juice/Monin strawberry syrup","description":"朗姆/青柠汁/莫林草莓糖浆","spiceIndex":"0","alcoholIndex":"10","withIce":"FALE","remark":""},
         {"id":"2","name":"Espresso martini","aliasName":"咖啡马提尼","category":"11","currency":"RMB","price":"48","unitPrice":"48/Glass","newStatus":"FALSE","recommendStatus":"FALSE","type":"alcoholic drink","image":"images/product/cocktail/Espresso_martini.png","mark":"Sweet+Sour+Bitter","enDescription":"Vodka/Espresso/Kahlua/Monin raspberry/Lemon juice","description":"伏特加/意式浓缩/卡鲁阿咖啡利口酒/莫林覆盆子/柠檬汁","spiceIndex":"0","alcoholIndex":"10","withIce":"FALE","remark":""},
         {"id":"3","name":"Pinky Point","aliasName":"粉点","category":"11","currency":"RMB","price":"48","unitPrice":"48/Glass","newStatus":"FALSE","recommendStatus":"FALSE","type":"alcoholic drink","image":"images/product/cocktail/Pinky_point.png","mark":"Sweet+Sour","enDescription":"Vodka/Espresso/Prucia/Cranberry Juice/Monin peach blossom syrup","description":"伏特加/意式浓缩/芙乐夏/蔓越莓汁/莫宁桃花糖浆","spiceIndex":"0","alcoholIndex":"20","withIce":"FALE","remark":""},
