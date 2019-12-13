@@ -184,8 +184,7 @@
         {"id":"153","name":"Opera","aliasName":"歌剧院","category":"4A","currency":"RMB","price":"42","unitPrice":"42/份","newStatus":"FALSE","recommendStatus":"FALSE","type":"dessert","image":"","mark":"巧克力味,橙子味","enDescription":"","description":"","spiceIndex":"0","alcoholIndex":"0","withIce":"FALE","remark":""},
         {"id":"154","name":"Valrhono Caramel Chocklate Ban","aliasName":"法芙娜焦糖巧克力","category":"4A","currency":"RMB","price":"42","unitPrice":"42/份","newStatus":"FALSE","recommendStatus":"FALSE","type":"dessert","image":"","mark":"","enDescription":"","description":"","spiceIndex":"0","alcoholIndex":"0","withIce":"FALE","remark":""},
         {"id":"155","name":"Pumpkin Cheese Cake","aliasName":"南瓜芝士蛋糕","category":"4A","currency":"RMB","price":"42","unitPrice":"42/份","newStatus":"FALSE","recommendStatus":"FALSE","type":"dessert","image":"","mark":"","enDescription":"","description":"","spiceIndex":"0","alcoholIndex":"0","withIce":"FALE","remark":""},
-        {"id":"156","name":"Tarte au fromage framboise","aliasName":"覆盆子芝士塔","category":"4A","currency":"RMB","price":"42","unitPrice":"42/份","newStatus":"FALSE","recommendStatus":"FALSE","type":"dessert","image":"","mark":"","enDescription":"","description":"","spiceIndex":"0","alcoholIndex":"0","withIce":"FALE","remark":""},
-        {"id":"157","name":"Match Cake","aliasName":"五十铃抹茶蛋糕","category":"4A","currency":"RMB","price":"42","unitPrice":"42/份","newStatus":"FALSE","recommendStatus":"FALSE","type":"dessert","image":"","mark":"","enDescription":"","description":"","spiceIndex":"0","alcoholIndex":"0","withIce":"FALE","remark":""}
+        {"id":"156","name":"Match Cake","aliasName":"五十铃抹茶蛋糕","category":"4A","currency":"RMB","price":"42","unitPrice":"42/份","newStatus":"FALSE","recommendStatus":"FALSE","type":"dessert","image":"","mark":"","enDescription":"","description":"","spiceIndex":"0","alcoholIndex":"0","withIce":"FALE","remark":""}
         
         ]
 }
