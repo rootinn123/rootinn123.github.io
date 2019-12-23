@@ -235,6 +235,7 @@ class _OrderListPageState extends State<OrderListPage>{
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text('${orderItem.product.name}', style: TextStyle(color: Colors.white, fontSize: AppDimens.font_16, height: 1.2), maxLines: 1, overflow: TextOverflow.ellipsis,),
+                Container(height: 3.0,),
                 Text('${orderItem.product.aliasName}', style: TextStyle(color: AppColors.descriptionFontColor, fontSize: AppDimens.font_12), maxLines: 1, overflow: TextOverflow.ellipsis,),
               ],
             ),

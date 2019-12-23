@@ -13,7 +13,7 @@ dependencies:
   flustars: ^0.2.6            # Flutter常用工具类库
   dio: ^2.1.0
   rxdart: ^0.21.0
-  cached_network_image: ^1.1.1
+  cached_network_image: ^2.0.0-rc
   screen: ">=0.0.4 <0.1.0"
   fluttertoast: ^3.1.0
   package_info: ^0.4.0+6

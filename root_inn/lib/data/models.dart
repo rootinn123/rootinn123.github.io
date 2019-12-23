@@ -136,6 +136,7 @@ class Product {
     if(val == null || val == '' || '$val'.length < 1) return <SpecsProduct>[];
     List<SpecsProduct> list = <SpecsProduct>[];
     int index = 1;
+    LogUtil.v('resolveUnitPrice----->>>>$productId----val: $val');
     for (String unitItem in '$val'.split(AppConfig.splitSymbol)){
       List<String> item = unitItem.split('/');
       list.add(SpecsProduct(id: '$productId-$index' ,price: Utils.tranfer2Double(item[0]), unit: item[1],checkCount: 0),);
