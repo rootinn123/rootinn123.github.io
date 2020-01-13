@@ -15,7 +15,7 @@
         {"id":"175","level":"3","name":"单一麦芽·苏格兰艾雷岛","title":"Single Malt Whiskey / Islay","image":"","subclassImageShow":"FALSE","hasMore":"FALSE","moreTitle":"","remark":""},
         {"id":"176","level":"3","name":"单一麦芽·苏格兰岛屿区","title":"Single Malt Whiskey / Island","image":"","subclassImageShow":"FALSE","hasMore":"FALSE","moreTitle":"","remark":""},
         {"id":"177","level":"3","name":"单一麦芽·苏格兰斯佩塞","title":"Single Malt Whiskey / Speyside","image":"","subclassImageShow":"FALSE","hasMore":"FALSE","moreTitle":"","remark":""},
-        {"id":"178","level":"2","name":"啤酒","title":"Beer","image":"","subclassImageShow":"FALSE","hasMore":"FALSE","moreTitle":"","remark":""},
+        {"id":"18","level":"2","name":"啤酒","title":"Beer","image":"","subclassImageShow":"FALSE","hasMore":"FALSE","moreTitle":"","remark":""},
         {"id":"2","level":"1","name":"食物","title":"食物/Food","image":"images/menu/menu_food.png","subclassImageShow":"TRUE","hasMore":"FALSE","moreTitle":"","remark":""},
         {"id":"21","level":"2","name":"主菜","title":"Main course","image":"","subclassImageShow":"TRUE","hasMore":"FALSE","moreTitle":"","remark":""},
         {"id":"22","level":"2","name":"主食","title":"Staple food","image":"","subclassImageShow":"TRUE","hasMore":"FALSE","moreTitle":"","remark":""},
