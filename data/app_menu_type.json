@@ -14,13 +14,5 @@
         "timeSlot": "17:00-21:30",
         "url": "data/menu_dinner.json",
         "remark": ""
-    },
-    {
-        "id": 4,
-        "name": "BAR TIME",
-        "aliasName": "酒吧",
-        "timeSlot": "21:30-later",
-        "url": "data/menu_bar_time.json",
-        "remark": ""
     }
 ]
