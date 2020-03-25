@@ -8,14 +8,6 @@
         "remark": ""
     },
     {
-        "id": 2,
-        "name": "AFTERNOON TEA",
-        "aliasName": "下午茶",
-        "timeSlot": "14:30-16:30",
-        "url": "data/menu_afternoon_tea.json",
-        "remark": ""
-    },
-    {
         "id": 3,
         "name": "DINNER",
         "aliasName": "晚餐",
