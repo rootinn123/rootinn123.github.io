@@ -3,7 +3,7 @@
         "id": 1,
         "name": "LUNCH",
         "aliasName": "午餐",
-        "timeSlot": "11:00-14:00",
+        "timeSlot": "10:30-14:00",
         "url": "data/menu_lunch.json",
         "remark": ""
     },
@@ -11,7 +11,7 @@
         "id": 3,
         "name": "DINNER",
         "aliasName": "晚餐",
-        "timeSlot": "17:00-21:30",
+        "timeSlot": "17:00-22:00",
         "url": "data/menu_dinner.json",
         "remark": ""
     }
